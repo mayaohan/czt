@@ -1,28 +1,6 @@
 <template>
 	<view class="content">
-		<!-- 个人信息及头像 -->
-		<div class="header left_right_center" @click="goto('memberinfo')">
-			<div class="avatarpanel">
-				<img class="avatar" :src="userIfo.avatarUrl"/>
-			</div>
-			<div class="ri">
-				<div class="t34 fc1 b500" style="color:#FCCA2F;position:relative;">
-					<span>{{userIfo.name}}</span>
-					<div class="right">
-						<span class="icon"></span>
-						<span class="icon"></span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="or">
-			<div class="bq">
-				<span class="con t28"><i style="display:inline-block" class="icon-search iconfont"></i>666</span>
-				<span class="con t28">二六个字称号</span>
-			</div>
-		</div>
-		
+		<e-header :inde="true"></e-header>
 		<div class="model">
 			<div class="xinazhi" style="height:40rpx;width:100%;"></div>
 			<div class="item-father left_right_center">
@@ -116,8 +94,9 @@
 
 <script>
 	import EDialog from '@/component/dialog'
+	import EHeader from '@/component/header'
 	export default {
-		components:{EDialog},
+		components:{EDialog,EHeader},
 		data() {
 			return {
 				code:'',
@@ -126,10 +105,6 @@
 				cfhistory:'',
 				hour:'',
 				min:'',
-				userIfo:{
-					name:'xxx',
-					avatarUrl:'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eonbb6BjKOJZJFyBtgraXiawVHA3sW51Cywx8jv8ysdd7vsia3WkpOpstMUc4Mq0dnzxaLT28saIwibw/132',
-				},
 				param:{
 					show:false,
 					imgUrl:'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eonbb6BjKOJZJFyBtgraXiawVHA3sW51Cywx8jv8ysdd7vsia3WkpOpstMUc4Mq0dnzxaLT28saIwibw/132',
@@ -275,75 +250,7 @@
 
 <style lang="scss" scoped>
 	@import "@/styles/index.scss";
-	// 头像信息
-    .header{
-      width:100%;
-      height:98rpx;
-      position:relative;
-      display:flex;
-	  opacity:1;
-	  padding:0 16rpx;
-	  .right{
-			position:absolute;
-			right:16rpx;
-			top:16rpx;
-			flex-direction: row;
-			display:flex;
-			align-items:center;
-			justify-content:flex-end;
-			.icon{
-				margin-left:22rpx;
-				width:48rpx;
-				height:48rpx;
-				background:#fff;
-			}
-	  }
-      .avatarpanel{
-        width:56rpx;
-        height:56rpx;
-        border-radius:50%;
-        overflow:hidden;
-      }
-      .ri{
-		width:100%;
-        padding-left:30rpx;
-        .bt{
-          margin-top:32rpx;
-          .age{
-            padding-left:64rpx;
-          }
-        }
-      }
-      .sj{
-        width:48rpx;
-        height:48rpx;
-        position:absolute;
-        right:14rpx;
-        top:50%;
-        transform: translate(0%, -50%);
-	  }
-	  
-	  
-	}
-	.or{
-		width:718rpx;
-		margin:0 16rpx;
-		.bq{
-			display:flex;
-			flex-wrap:wrap;
-			width:100%;
-			margin-bottom:30rpx;
-			.con{
-				background:rgba(252,202,47,0.19);
-				border-radius:20rpx;
-				padding:5rpx 30rpx;
-				color:#F2AE29;
-				white-space:nowrap;
-				margin-right:10rpx;
-				margin-bottom:10rpx;
-			}
-		}
-	}
+	
 	.model{
 		width:718rpx;
 		height:366rpx;
@@ -354,7 +261,7 @@
 	.item-father{
 		width:100%;
 		.item{
-			width:122rpx;
+			width:120rpx;
 			margin:12rpx;
 			img{
 				width:100%;
@@ -469,16 +376,6 @@
 		height:180rpx;
 		margin:28rpx 0;
 		background:#fff;
-	}
-	.huang{
-		color:#F7CE4E;
-	}
-	.cont{
-		font-size:34rpx;
-		font-family:PingFangSC-Regular;
-		font-weight:400;
-		color:rgba(34,30,41,1);
-		line-height:48rpx;
 	}
 </style>
 

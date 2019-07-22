@@ -5,6 +5,30 @@
 			"style": {
 				"navigationBarTitleText": "Title"
 			}
+		},
+		{
+			"path": "pages/reward/index",
+			"style": {
+				"navigationBarTitleText": "Title"
+			}
+		},
+		{
+			"path": "pages/my/index",
+			"style": {
+				"navigationBarTitleText": "Title"
+			}
+		},
+		{
+			"path": "pages/child/index",
+			"style": {
+				"navigationBarTitleText": "Title"
+			}
+		},
+		{
+			"path": "pages/ranking/index",
+			"style": {
+				"navigationBarTitleText": "Title"
+			}
 		}
 	],
 	"globalStyle": {
@@ -26,7 +50,7 @@
 	"tabBar":{
 		"color":"#6A6A6A",
 		"position":"bottom",
-		// "backgroundColor":,
+		"backgroundColor":"#221E29",
 		// "borderStyle":,
 		"selectedColor":"#FCCA2F",
 		"list":[
@@ -39,19 +63,19 @@
 			{
 				"iconPath":"static/logo.png",
 				"selectedIconPath":"static/logo.png",
-				"pagePath":"pages/index/index",
+				"pagePath":"pages/reward/index",
 				"text":"奖品"
 			},
 			{
 				"iconPath":"static/logo.png",
 				"selectedIconPath":"static/logo.png",
-				"pagePath":"pages/index/index",
+				"pagePath":"pages/ranking/index",
 				"text":"排名"
 			},
 			{
 				"iconPath":"static/logo.png",
 				"selectedIconPath":"static/logo.png",
-				"pagePath":"pages/index/index",
+				"pagePath":"pages/my/index",
 				"text":"我的"
 			}
 		]
