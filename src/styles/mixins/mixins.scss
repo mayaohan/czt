@@ -1,0 +1,20 @@
+@mixin b($block) {
+    $B: $namespace+'-'+$block !global;
+
+    .#{$B} {
+        @content;
+    }
+}
+@mixin m($modifier) {
+    $selector: &;
+    $currentSelector: "";
+    @each $unit in $modifier {
+        $currentSelector: #{$currentSelector + & + $theme_header + $unit + ","};
+    }
+
+    @at-root {
+        #{$currentSelector} {
+        @content;
+        }
+    }
+}

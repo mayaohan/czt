@@ -1,0 +1,237 @@
+@import './mixins/theme.scss';
+div,p,view,a,ul,li,dl,dt,dd,view{
+    font-family:Noto Sans S Chinese;
+    box-sizing:border-box;
+}
+.x_img{
+    width:100%;
+    height:100%;
+}
+.outside{
+    padding:0 40rpx;
+    border-bottom:20rpx solid rgba(229,229,229,0.3);
+}
+.text-center{
+    text-align:center;
+}
+.title1{
+    font-size:34rpx;
+    font-family:Noto Sans S Chinese;
+    font-weight:400;
+    color:#0f0f0f;
+    padding-top:30rpx;
+}
+
+.title2{
+    font-size:28rpx;
+    font-family:Noto Sans S Chinese;
+    font-weight:400;
+    color:#050505;
+    padding-top:30rpx;
+}
+.content_title{
+    color:#888;
+    font-size:28rpx;
+    font-family:Noto Sans S Chinese;
+    display:flex;
+}
+.small{
+    font-size:22rpx;
+    color:$lify_b;
+}
+.blod{
+    font-weight:700 !important;
+}
+// 剧中
+.position_center{
+    flex-direction: row;
+    display:flex!important;
+    align-items:center;
+    justify-content:center;
+}
+// 上下居中
+.column_center{
+    flex-direction: column;
+    display:flex;
+    align-items:center;
+}
+// 左右排 左右居中
+.left_right_center{
+    flex-direction: row;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+// 上下排 左右居中
+.column_center_center{
+    flex-direction: column;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+// 两端
+.between{
+    justify-content:space-between!important;
+}
+.position_left{
+    flex-direction: row;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+}
+.nopadding{
+    padding:0!important;
+}
+.nomargin{
+    margin:0!important;
+}
+
+.ellipsis{
+    width: 1000rpx;
+    overflow: hidden;/*超出部分隐藏*/
+    white-space: nowrap;/*不换行*/
+    text-overflow:ellipsis;/*超出部分文字以...显示*/
+}
+.noborder{
+    border:0!important;
+}
+
+.text-right{
+    display:flex;
+    justify-content: flex-end;
+}
+
+.func_color{
+    color:$theme_a;
+}
+
+.roud_icon{
+    border:1px solid $theme_a;
+    border-radius: 50%;
+    padding:4rpx;
+}
+.relative{
+    position:relative;
+}
+.column{
+    flex-direction:column
+}
+
+// 2.0
+.t68{
+    font-size:68rpx;
+    line-height:68rpx;
+}
+.t80{
+    font-size:80rpx;
+    line-height:80rpx;
+}
+.t60{
+    font-size:60rpx;
+    line-height:60rpx;
+}
+.t48{
+    font-size:48rpx;
+    line-height:48rpx;
+}
+.t28{
+    font-size:28rpx;
+    line-height:28rpx;
+}
+.t22{
+    font-size:22rpx;
+    line-height:22rpx;
+}
+.t24{
+    font-size:24rpx;
+    line-height:24rpx;
+}
+.t34{
+    font-size:34rpx;
+    line-height:34rpx;
+}
+.t36{
+    font-size:36rpx;
+    line-height:36rpx;
+}
+
+.fc0{
+    color:#0A0909
+}
+.fc1{
+    color:#0F0F0F;
+}
+.fc1p{
+    color:rgba(15, 15, 15, 0.3);
+}
+.fc1n{
+    color:rgba(15, 15, 15, 1);
+}
+.fcf{
+    color:#fff;
+}
+.fcfc{
+    color:rgba(226, 197, 227, 1);
+}
+.fch{
+    color:rgba(108, 52, 50, 1);
+}
+.fct{
+    color:rgba(53, 53, 53, 1);
+}
+.fcx{
+    color:#FF6C6C;
+}
+.fcbx{
+    color:#519CDD;
+}
+.fcxxx{
+    color:#D6ABD3;
+}
+.fccc{
+    color:#6D3431;
+}
+.fcccd{
+    color:#E2C5E3;
+}
+.p30{
+    padding:0 30rpx;
+}
+img{
+    width:100%;
+    height:100%;
+}
+.b700{
+    font-weight:700;
+}
+.b500{
+    font-weight:500;
+}
+.b300{
+    font-weight:300;
+}
+
+// 原生按钮修改
+.ys_btn{
+    background:rgba(0,0,0,0);
+    display:inline;
+    border:none;
+    position:unset;
+    padding:0;
+}
+.button-hover{
+    background:none;
+    box-shadow: none;
+    border:none;
+}
+
+.toPage{
+    justify-content:flex-start;
+    padding-left:30rpx;
+}
+
+// 下描边
+.bt1s{
+    border-bottom:1px solid rgba(248,248,248,1);
+}
