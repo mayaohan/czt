@@ -51,30 +51,29 @@
 		"color":"#6A6A6A",
 		"position":"bottom",
 		"backgroundColor":"#221E29",
-		// "borderStyle":,
 		"selectedColor":"#FCCA2F",
 		"list":[
 			{
-				"iconPath":"static/ren.png",
-				"selectedIconPath":"static/logo.png",
+				"iconPath":"static/home1.png",
+				"selectedIconPath":"static/home2.png",
 				"pagePath":"pages/index/index",
 				"text":"首页"
 			},
 			{
-				"iconPath":"static/logo.png",
-				"selectedIconPath":"static/logo.png",
+				"iconPath":"static/my1.png",
+				"selectedIconPath":"static/my2.png",
 				"pagePath":"pages/reward/index",
 				"text":"奖品"
 			},
 			{
-				"iconPath":"static/logo.png",
-				"selectedIconPath":"static/logo.png",
+				"iconPath":"static/win1.png",
+				"selectedIconPath":"static/win2.png",
 				"pagePath":"pages/ranking/index",
 				"text":"排名"
 			},
 			{
-				"iconPath":"static/logo.png",
-				"selectedIconPath":"static/logo.png",
+				"iconPath":"static/center1.png",
+				"selectedIconPath":"static/center2.png",
 				"pagePath":"pages/my/index",
 				"text":"我的"
 			}
