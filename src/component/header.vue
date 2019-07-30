@@ -2,12 +2,12 @@
     <div class="conte">
         <!-- 个人信息及头像 -->
         <div class="header left_right_center">
-            <div class="avatarpanel">
+            <div class="avatarpanel" v-if="getUser">
                 <img class="avatar" :src="userIfo.avatarUrl"/>
             </div>
             <div class="ri">
                 <div class="t34 fc1 b500" style="color:#FCCA2F;position:relative;">
-                    <span>{{userIfo.name}}</span>
+                    <span  v-if="getUser">{{userIfo.name}}</span>
                     <div class="right" v-if="inde">
                         <span class="icon" @click="go('child')">
                             <img style="width:36upx;height:48upx;" src="/static/ss.png" alt="">
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div class="or">
+        <div class="or" v-if="getUser">
             <div class="bq">
                 <span class="con t28"><i style="display:inline-block" class="icon-search iconfont"></i>666</span>
                 <span class="con t28">二六个字称号</span>
@@ -39,8 +39,8 @@
         },
 		computed:{
 			getUser(){
-				return !this.$store.state.personal.code
-			}
+				return this.$store.state.personal.code!=undefined
+			},
 		},
         data(){
             return {
@@ -52,10 +52,19 @@
         },
         methods:{
             go(data){
+                if(!this.getUser){
+					this.login()
+					return
+				}
                 uni.navigateTo({
                     url:`/pages/${data}/index`
                 })
-            }
+            },
+            login(){
+				wx.navigateTo({
+					url: '/pages/login/index'
+				})
+			}
         }
     }
 </script>

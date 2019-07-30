@@ -52,9 +52,11 @@
             },
             ent_ov(data){
                 this.ent.show = false
-                wx.navigateTo({
-                    url: '/pages/address/index'
-                })
+                if(data){
+                    wx.navigateTo({
+                        url: '/pages/address/index'
+                    })
+                }
 			},
         }
     }

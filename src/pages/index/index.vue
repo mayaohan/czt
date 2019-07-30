@@ -118,6 +118,11 @@
 				isData:false,//模拟是否有数据
 			}
 		},
+		computed:{
+			getUser(){
+				return this.$store.state.personal.code!=undefined
+			},
+		},
 		onLoad() {
 
 		},
@@ -138,19 +143,28 @@
 				}
 			},
 			up(){
-				this.login()
+				if(!this.getUser){
+					this.login()
+					return
+				}
 				this.param.title = '确认下注涨吗？'
 				this.param.flag = 1
 				this.param.show = true
 			},
 			down(){
-				this.login()
+				if(!this.getUser){
+					this.login()
+					return
+				}
 				this.param.title = '确认下注跌吗？'
 				this.param.flag = 2
 				this.param.show = true
 			},
 			env_change(){
-				this.login()
+				if(!this.getUser){
+					this.login()
+					return
+				}
 				this.ent.show = true
 			},
 			ent_ov(data){
@@ -243,16 +257,10 @@
 				// });
 			},
 			login(){
-				if(!this.$store.state.personal.code){
-					wx.navigateTo({
-						url: '/pages/login/index'
-					})
-					return
-				}
+				wx.navigateTo({
+					url: '/pages/login/index'
+				})
 			}
-		},
-		onHide(){
-			this.login()
 		},
 		mounted() {
 			this.location()
