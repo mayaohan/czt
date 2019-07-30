@@ -5,30 +5,30 @@
 			<div class="xinazhi" style="height:40rpx;width:100%;"></div>
 			<div class="item-father left_right_center">
 				<div class="item" @click="env_change">
-					<img src="/static/btb.png" alt="" mode="widthFix">
+					<img src="/static/bt1.png" alt="" mode="widthFix">
 				</div>
 				<div class="item" @click="env_change">
-					<img src="/static/btb.png" alt="" mode="widthFix">
+					<img src="/static/bt2.png" alt="" mode="widthFix">
 				</div>
 				<div class="item" @click="env_change">
-					<img src="/static/btb.png" alt="" mode="widthFix">
+					<img src="/static/bt3.png" alt="" mode="widthFix">
 				</div>
 				<div class="item" @click="env_change">
-					<img src="/static/btb.png" alt="" mode="widthFix">
+					<img src="/static/bt4.png" alt="" mode="widthFix">
 				</div>
 			</div>
 			<div class="item-father left_right_center">
 				<div class="item" @click="env_change">
-					<img src="/static/btb.png" alt="" mode="widthFix">
+					<img src="/static/bt5.png" alt="" mode="widthFix">
 				</div>
 				<div class="item" @click="env_change">
-					<img src="/static/btb.png" alt="" mode="widthFix">
+					<img src="/static/bt6.png" alt="" mode="widthFix">
 				</div>
 				<div class="item" @click="env_change">
-					<img src="/static/btb.png" alt="" mode="widthFix">
+					<img src="/static/bt7.png" alt="" mode="widthFix">
 				</div>
 				<div class="item" @click="env_change">
-					<img src="/static/btb.png" alt="" mode="widthFix">
+					<img src="/static/bt8.png" alt="" mode="widthFix">
 				</div>
 			</div>
 		</div>
@@ -138,16 +138,19 @@
 				}
 			},
 			up(){
+				this.login()
 				this.param.title = '确认下注涨吗？'
 				this.param.flag = 1
 				this.param.show = true
 			},
 			down(){
+				this.login()
 				this.param.title = '确认下注跌吗？'
 				this.param.flag = 2
 				this.param.show = true
 			},
 			env_change(){
+				this.login()
 				this.ent.show = true
 			},
 			ent_ov(data){
@@ -238,7 +241,18 @@
 				// 	  }
 				// 	}
 				// });
+			},
+			login(){
+				if(!this.$store.state.personal.code){
+					wx.navigateTo({
+						url: '/pages/login/index'
+					})
+					return
+				}
 			}
+		},
+		onHide(){
+			this.login()
 		},
 		mounted() {
 			this.location()

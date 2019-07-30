@@ -9,8 +9,12 @@
                 <div class="t34 fc1 b500" style="color:#FCCA2F;position:relative;">
                     <span>{{userIfo.name}}</span>
                     <div class="right" v-if="inde">
-                        <span class="icon" @click="go('child')"></span>
-                        <span class="icon"></span>
+                        <span class="icon" @click="go('child')">
+                            <img style="width:36upx;height:48upx;" src="/static/ss.png" alt="">
+                        </span>
+                        <span class="icon">
+                            <img src="/static/nn.png" alt="" mode="widthFix">
+                        </span>
                     </div>
                 </div>
             </div>
@@ -33,6 +37,11 @@
                 default:false
             }
         },
+		computed:{
+			getUser(){
+				return !this.$store.state.personal.code
+			}
+		},
         data(){
             return {
 				userIfo:{
@@ -56,67 +65,70 @@
     // 头像信息
     .header{
       width:100%;
-      height:98rpx;
+      height:98upx;
       position:relative;
       display:flex;
 	  opacity:1;
-	  padding:0 16rpx;
+	  padding:0 16upx;
 	  .right{
 			position:absolute;
-			right:16rpx;
-			top:16rpx;
+			right:16upx;
+			top:16upx;
 			flex-direction: row;
 			display:flex;
 			align-items:center;
 			justify-content:flex-end;
 			.icon{
-				margin-left:22rpx;
-				width:48rpx;
-				height:48rpx;
-				background:#fff;
+				margin-left:22upx;
+				width:48upx;
+				height:48upx;
+				// background:#fff;
+                img{
+                    width:100%;
+                }
 			}
 	  }
       .avatarpanel{
-        width:56rpx;
-        height:56rpx;
+        width:56upx;
+        height:56upx;
         border-radius:50%;
         overflow:hidden;
       }
       .ri{
 		width:100%;
-        padding-left:30rpx;
+        padding-left:30upx;
         .bt{
-          margin-top:32rpx;
+          margin-top:32upx;
           .age{
-            padding-left:64rpx;
+            padding-left:64upx;
           }
         }
       }
       .sj{
-        width:48rpx;
-        height:48rpx;
+        width:48upx;
+        height:48upx;
         position:absolute;
-        right:14rpx;
+        right:14upx;
         top:50%;
         transform: translate(0%, -50%);
 	  }
 	}
     .or{
-		width:718rpx;
-		margin:0 16rpx;
+		width:718upx;
+		margin:0 16upx;
 		.bq{
 			display:flex;
 			flex-wrap:wrap;
 			width:100%;
-			margin-bottom:30rpx;
+			margin-bottom:30upx;
 			.con{
 				background:rgba(252,202,47,0.19);
-				border-radius:20rpx;
-				padding:5rpx 30rpx;
+				border-radius:20upx;
+				padding:5upx 30upx;
 				color:#F2AE29;
 				white-space:nowrap;
-				margin-right:10rpx;
-				margin-bottom:10rpx;
+				margin-right:10upx;
+				margin-bottom:10upx;
 			}
 		}
 	}

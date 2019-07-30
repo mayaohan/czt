@@ -4,13 +4,13 @@
         <div class="logos">
             <div class="item" v-for="obj in 4" :key="obj"  @click="env_change">
                 <div class="icon">
-                    <img src="/static/btb.png" alt="" mode="widthFix">
+                    <img :src="'/static/bt'+(obj+1)+'.png'" alt="" mode="widthFix">
                 </div>
                 <div class="font left_right_center t28">兑换</div>
             </div>
             <div class="item action" v-for="obj in 5" :key="obj"  @click="env_change">
                 <div class="icon">
-                    <img src="/static/btb.png" alt="" mode="widthFix">
+                    <img :src="'/static/bt'+(obj+1)+'.png'" alt="" mode="widthFix">
                 </div>
                 <div class="font left_right_center t28">兑换</div>
             </div>
@@ -51,13 +51,10 @@
 				this.ent.show = true
             },
             ent_ov(data){
-				if(data){
-					setTimeout(e=>{
-						this.ent.show = false
-					},1000)
-				}else{
-					this.ent.show = false
-				}
+                this.ent.show = false
+                wx.navigateTo({
+                    url: '/pages/address/index'
+                })
 			},
         }
     }

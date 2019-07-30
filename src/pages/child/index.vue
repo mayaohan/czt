@@ -5,7 +5,7 @@
         <div class="item" v-for="obj in 6" :key="obj">
             <p class="t34">群友PK</p>
             <p class="t24 bottom">每天找两个微信群群友 <span style="padding-left:28rpx;"> 积分+5</span></p>
-            <div class="right">签到</div>
+            <div :class="[obj==2?'active':'','right']" @click="qds({obj})">签到</div>
         </div>
         <div class="zhanwei"></div>
         <div class="fanhui" @click="back">返回</div>
@@ -25,6 +25,9 @@
                 uni.navigateBack({
                     delta:1
                 })
+            },
+            qds(da){
+                console.log(da)
             }
         }
     }
@@ -45,6 +48,9 @@
         border-radius:8rpx;
         position:relative;
         padding:24rpx;
+        .active{
+            opacity: 0.3;
+        }
         .bottom{
             margin-top:15rpx;
             color:rgba(55,57,75,1);

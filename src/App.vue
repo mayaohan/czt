@@ -8,6 +8,12 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
+		},
+		created(){
+			const value = wx.getStorageSync('loginKey')
+			if(value){
+				this.$store.commit('SET_PERSONAL', value)
+			}
 		}
 	}
 </script>

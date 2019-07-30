@@ -29,6 +29,18 @@
 			"style": {
 				"navigationBarTitleText": "Title"
 			}
+		},
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "Title"
+			}
+		},
+		{
+			"path": "pages/address/index",
+			"style": {
+				"navigationBarTitleText": "Title"
+			}
 		}
 	],
 	"globalStyle": {
