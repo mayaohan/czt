@@ -36,18 +36,18 @@
 		<div class="title_a t24 left_right_center">开奖结果以每晚9点 Binance.com BTC/usdt 交易对为准</div>
 
 		<div class="middles">
-			<div class="bigbtn left_right_center" v-if="isData">
-				<div class="btns lv left_right_center" @click="up">买涨</div>
-				<div class="btns ho left_right_center" @click="down">买跌</div>
+			<div class="bigbtn left_right_center" v-if="isData.done=='0'">
+				<div class="btns lv left_right_center" @click="upAndDown(1)">买涨</div>
+				<div class="btns ho left_right_center" @click="upAndDown(0)">买跌</div>
 			</div>
 			<div class="bigbtn left_right_center" v-else>
 				<div class="font">赢取的积分将在下注日晚9点15返回到您的账户 明日下午13:00后可参与心的一轮竞猜</div>
 			</div>
 			<div class="jd">
-				<div class="lv" style="width:60%;"></div>
+				<div class="lv" :style="{width:width}"></div>
 				<div class="ho"></div>
 			</div>
-			<div class="timers left_right_center" v-if="isData">
+			<div class="timers left_right_center" v-if="isData.done=='0'">
 				<div class="item">
 					<p class="t28 ts1">距离今日押注截止还有</p>
 					<p class="t24 ts2">（每次下注消耗 30 积分）</p>
@@ -115,49 +115,69 @@
 					show:false,
 					imgUrl:'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eonbb6BjKOJZJFyBtgraXiawVHA3sW51Cywx8jv8ysdd7vsia3WkpOpstMUc4Mq0dnzxaLT28saIwibw/132',
 				},
-				isData:false,//模拟是否有数据
+				isData:{
+					done: "0",
+					downCount: 0,
+					secCount: 0,
+					type: '',
+					upCount: 0,
+					wagerId: 0
+				},//模拟是否有数据
 			}
 		},
 		computed:{
 			getUser(){
-				return this.$store.state.personal.code!=undefined
+				return this.$store.state.memberInfo.id!=undefined
 			},
+			userInfo(){
+				return this.$store.state.memberInfo
+			},
+			width(){
+				let a = Number(this.isData.upCount)
+				let b = Number(this.isData.downCount)
+				let sum = Number(this.isData.upCount) + Number(this.isData.downCount)
+				if(sum>0&&a>0){
+					return parseInt(a/sum*100)+'%'
+				}else{
+					return '50%'
+				}
+			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-			cuntry(data){
+			async cuntry(data){
 				if(data){
-					setTimeout(e=>{
-						if(this.param.flag==1){
-
+					if(this.userInfo.expSum>=15){
+						let res = await this.$http.post(`/userWager/insert`,{type:String(this.param.flag)})
+						// console.log(res)
+						if(res.s==1){
+							this.userStatus()
+							this.$store.commit('KOU_expSum',15)
+							this.param.show = false
+							this.$forceUpdate()
 						}
-						if(this.param.flag==2){
-							
-						}
-						this.param.show = false
-					},1000)
+					}else{
+						console.log('积分不足')
+					}
+					
+					// this.param.show = false
 				}else{
 					this.param.show = false
 				}
 			},
-			up(){
+			upAndDown(data){
 				if(!this.getUser){
 					this.login()
 					return
 				}
-				this.param.title = '确认下注涨吗？'
-				this.param.flag = 1
-				this.param.show = true
-			},
-			down(){
-				if(!this.getUser){
-					this.login()
-					return
+				if(data){
+					this.param.title = '确认下注涨吗？'
+				}else{
+					this.param.title = '确认下注跌吗？'
 				}
-				this.param.title = '确认下注跌吗？'
-				this.param.flag = 2
+				this.param.flag = data
 				this.param.show = true
 			},
 			env_change(){
@@ -165,7 +185,9 @@
 					this.login()
 					return
 				}
-				this.ent.show = true
+				uni.switchTab({
+					url: '/pages/reward/index'
+				})
 			},
 			ent_ov(data){
 				if(data){
@@ -177,11 +199,7 @@
 				}
 			},
 			clock(){
-				let oDate = new Date();//获取日期对象
-				let oldTime = oDate.getTime();//现在距离1970年的毫秒数
-				let newDate = new Date('2020/1/1 00:00:00');
-				let newTime = newDate.getTime();//2019年距离1970年的毫秒数
-				let second = Math.floor((newTime - oldTime) / 1000);//未来时间距离现在的秒数
+				let second = this.isData.secCount
 				let day = Math.floor(second / 86400);//整数部分代表的是天；一天有24*60*60=86400秒 ；
 				second = second % 86400;//余数代表剩下的秒数；
 				let hour = Math.floor(second / 3600);//整数部分代表小时；
@@ -260,11 +278,19 @@
 				wx.navigateTo({
 					url: '/pages/login/index'
 				})
+			},
+			async userStatus(){
+				let res = await this.$http.post('/userWager/getStatus')
+				if(res.s == 1){
+					Object.assign(this.isData,res.d)
+					console.log(this.isData)
+				}
 			}
 		},
 		mounted() {
 			this.location()
 			this.userinfo()
+			if(this.getUser) this.userStatus()
 			setInterval(this.clock, 1000);
 		}
 	}

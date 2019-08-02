@@ -1,7 +1,6 @@
 import store from './store'
 
-const host = "https://jyan.vip/xcx"
-const mshost = "https://jyan.vip/api"
+const host = "http://39.106.214.109/xcx"
 
 function get(url, data) {
   return request( host + url, 'GET', data)
@@ -10,21 +9,15 @@ function get(url, data) {
 function post(url, data) {
   return request( host + url, 'POST', data,{
     'content-type': 'application/x-www-form-urlencoded',
-    'Cookie':'SESSION='+store.state.sessionid
+    'Cookie':'SESSION='+store.state.memberInfo.sessionid
   })
 }
 
-function mspost(url, data) {
-  return request( mshost + url, 'POST', data,{
-    'content-type': 'application/x-www-form-urlencoded',
-    'Cookie':'SESSION='+store.state.sessionid
-  })
-}
 
 function put(url, data) {
   return request( host + url, 'PUT', data,{
     'content-type': 'application/x-www-form-urlencoded',
-    'Cookie':'SESSION='+store.state.sessionid
+    'Cookie':'SESSION='+store.state.memberInfo.sessionid
   })
 }
 
@@ -38,10 +31,9 @@ const http ={
   put: put,
   del: del,
   request: request,
-  mspost: mspost
 }
 
-function request(url, method, data, header = {"Cookie":"SESSION="+store.state.sessionid}) {
+function request(url, method, data, header = {"Cookie":"SESSION="+store.state.memberInfo.sessionid}) {
   wx.showLoading({
     title: '加载中',
     mask: true

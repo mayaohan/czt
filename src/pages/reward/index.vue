@@ -2,17 +2,15 @@
     <div class="content">
         <e-header></e-header>
         <div class="logos">
-            <div class="item" v-for="obj in 4" :key="obj"  @click="env_change">
-                <div class="icon">
-                    <img :src="'/static/bt'+(obj+1)+'.png'" alt="" mode="widthFix">
+            <div class="item" v-for="obj in list" :key="obj.id">
+                <div class="icon" v-if="obj.num>0&&obj.point<=expSum&&obj.winTime<=topWinTime" @click="env_change(obj)">
+                    <img :src="'/static/bt'+obj.id+'.png'" alt="" mode="widthFix">
+                    <div class="font left_right_center t28">兑换</div>
                 </div>
-                <div class="font left_right_center t28">兑换</div>
-            </div>
-            <div class="item action" v-for="obj in 5" :key="obj"  @click="env_change">
-                <div class="icon">
-                    <img :src="'/static/bt'+(obj+1)+'.png'" alt="" mode="widthFix">
+                <div v-else class="icon action">
+                    <img :src="'/static/bt'+obj.id+'.png'" alt="" mode="widthFix">
+                    <div class="font left_right_center t28">兑换</div>
                 </div>
-                <div class="font left_right_center t28">兑换</div>
             </div>
         </div>
 
@@ -36,28 +34,51 @@
     import EDialog from '@/component/dialog'
     export default {
         components:{EHeader,EDialog},
-        mounted(){
+        computed:{
+            topWinTime(){
+                return this.$store.state.memberInfo.topWinTime
+            },
+            expSum(){
+                return this.$store.state.memberInfo.expSum
+            }
+        },
+        onShow(){
+            this.jp()
         },
         data() {
 			return {
 				ent:{
 					show:false,
 					imgUrl:'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eonbb6BjKOJZJFyBtgraXiawVHA3sW51Cywx8jv8ysdd7vsia3WkpOpstMUc4Mq0dnzxaLT28saIwibw/132',
-				},
+                },
+                list:[],
+                jpParam:{
+                    id:'',
+                    point:''
+                },
 			}
 		},
         methods:{
-            env_change(){
+            env_change(data){
+                this.jpParam.id = data.id
+                this.jpParam.point = data.point
 				this.ent.show = true
             },
             ent_ov(data){
                 this.ent.show = false
                 if(data){
                     wx.navigateTo({
-                        url: '/pages/address/index'
+                        url: `/pages/address/index?id=${this.jpParam.id}&point=${this.jpParam.point}`
                     })
                 }
-			},
+            },
+            async jp(){
+                let res = await this.$http.post('/goods/list')
+                if(res.s == 1){
+                    this.list = res.d
+                    console.log(this.list)
+                }
+            }
         }
     }
 </script>

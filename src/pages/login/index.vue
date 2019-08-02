@@ -36,15 +36,15 @@
             encryptData: e.mp.detail.encryptedData,
             iv: e.mp.detail.iv,
           }
-          console.log(formdata)
-          this.$store.commit('SET_PERSONAL',formdata)
-          // let data = await this.$http.post('/memberinfo',formdata)
-          // if(data.s==1){
-            
-          // }
-          wx.reLaunch({
-            url: '/pages/index/index'
-          })
+          // this.$store.commit('SET_PERSONAL',formdata)
+          let data = await this.$http.post('/memberinfo',formdata)
+          console.log(data)
+          if(data.s==1){
+            this.$store.commit('SET_memberInfo',data.d)
+            wx.reLaunch({
+              url: '/pages/index/index'
+            })
+          }
         }
       }
     },

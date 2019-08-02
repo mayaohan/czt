@@ -77,7 +77,18 @@
 <script>
     import EHeader from '@/component/header'
     export default {
-        components:{EHeader}
+        components:{EHeader},
+        methods:{
+            async zj(){
+                let res = await this.$http.post('/userWager/list')
+                if(res.s == 1){
+                    console.log(this.list)
+                }
+            }
+        },
+        onShow(){
+            this.zj()
+        }
     }
 </script>
 

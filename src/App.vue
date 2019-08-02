@@ -10,9 +10,10 @@
 			console.log('App Hide')
 		},
 		created(){
-			const value = wx.getStorageSync('loginKey')
+			const value = wx.getStorageSync('memberInfo')
+			console.log(value)
 			if(value){
-				this.$store.commit('SET_PERSONAL', value)
+				this.$store.commit('UP_memberInfo', value)
 			}
 		}
 	}

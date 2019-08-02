@@ -8,7 +8,28 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        personal:{}
+        personal:{},
+        memberInfo:{
+            age: null,
+            avatarUrl: "",
+            birthdate: 0,
+            detectionsLasttime: 0,
+            detectionsNumber: 0,
+            expSum: 0,
+            id: null,
+            name: "",
+            nearWinTime: 0,
+            openId: "",
+            registrationDate: 0,
+            sex: 1,
+            silentNumber: 0,
+            sumFailTime: 0,
+            sumWinTime: 0,
+            topWinTime: 0,
+            sessionid: "",
+            type: "i",
+        },
+
     },
     mutations: {
     //   SET_CITY(state,data){
@@ -19,6 +40,26 @@ const store = new Vuex.Store({
             wx.setStorage({
                 key: 'loginKey',
                 data: state.personal
+            })
+        },
+        // 登陆用得
+        SET_memberInfo(state,data){
+            Object.assign(state.memberInfo,{sessionid:data.sessionid},{type:data.type},data.memberInfo)
+            wx.setStorage({
+                key: 'memberInfo',
+                data: state.memberInfo
+            })
+        },
+        // 页面刷新在缓存里取用户信息
+        UP_memberInfo(state,data){
+            Object.assign(state.memberInfo,data)
+        },
+        // 下注扣分
+        KOU_expSum(state,data){
+            state.memberInfo.expSum-=data
+            wx.setStorage({
+                key: 'memberInfo',
+                data: state.memberInfo
             })
         }
     },

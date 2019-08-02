@@ -3,11 +3,11 @@
         <!-- 个人信息及头像 -->
         <div class="header left_right_center">
             <div class="avatarpanel" v-if="getUser">
-                <img class="avatar" :src="userIfo.avatarUrl"/>
+                <img class="avatar" :src="userInfo.avatarUrl"/>
             </div>
             <div class="ri">
                 <div class="t34 fc1 b500" style="color:#FCCA2F;position:relative;">
-                    <span  v-if="getUser">{{userIfo.name}}</span>
+                    <span  v-if="getUser">{{userInfo.name}}</span>
                     <div class="right" v-if="inde">
                         <span class="icon" @click="go('child')">
                             <img style="width:36upx;height:48upx;" src="/static/ss.png" alt="">
@@ -21,7 +21,7 @@
         </div>
         <div class="or" v-if="getUser">
             <div class="bq">
-                <span class="con t28"><i style="display:inline-block" class="icon-search iconfont"></i>666</span>
+                <span class="con t28"><i style="display:inline-block" class="icon-search iconfont"></i>{{userInfo.expSum}}</span>
                 <span class="con t28">二六个字称号</span>
             </div>
         </div>
@@ -39,8 +39,12 @@
         },
 		computed:{
 			getUser(){
-				return this.$store.state.personal.code!=undefined
-			},
+                console.log(this.$store.state.memberInfo.id)
+				return this.$store.state.memberInfo.id!=undefined
+            },
+            userInfo(){
+				return this.$store.state.memberInfo
+			}
 		},
         data(){
             return {
