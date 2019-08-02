@@ -45,7 +45,7 @@ const store = new Vuex.Store({
         // 登陆用得
         SET_memberInfo(state,data){
             Object.assign(state.memberInfo,{sessionid:data.sessionid},{type:data.type},data.memberInfo)
-            wx.setStorage({
+            uni.setStorage({
                 key: 'memberInfo',
                 data: state.memberInfo
             })
@@ -57,7 +57,7 @@ const store = new Vuex.Store({
         // 下注扣分
         KOU_expSum(state,data){
             state.memberInfo.expSum-=data
-            wx.setStorage({
+            uni.setStorage({
                 key: 'memberInfo',
                 data: state.memberInfo
             })

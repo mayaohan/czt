@@ -2,10 +2,10 @@
     <div class="content">
         <div style="width:100%;height:26rpx;"></div>
 
-        <div class="item" v-for="obj in 6" :key="obj">
-            <p class="t34">群友PK</p>
-            <p class="t24 bottom">每天找两个微信群群友 <span style="padding-left:28rpx;"> 积分+5</span></p>
-            <div :class="[obj==2?'active':'','right']" @click="qds({obj})">签到</div>
+        <div class="item" v-for="(obj,idx) in list" :key="obj.id">
+            <p class="t34">{{obj.title}}</p>
+            <p class="t24 bottom">{{obj.content}} <span style="padding-left:28rpx;"> 积分+{{obj.expSum}}</span></p>
+            <div :class="[obj.btn?'active':'','right']" @click="qds(idx,obj)">签到</div>
         </div>
         <div class="zhanwei"></div>
         <div class="fanhui" @click="back">返回</div>
@@ -17,7 +17,64 @@
         name:'child',
         data(){
             return {
-
+                list:[
+                    {
+                        btn:false,
+                        title:'任务1',
+                        content:'任务内容1',
+                        expSum:5,
+                        id:'01'
+                    },
+                    {
+                        btn:false,
+                        title:'任务2',
+                        content:'任务内容2',
+                        expSum:5,
+                        id:'02'
+                    },
+                    {
+                        btn:false,
+                        title:'任务3',
+                        content:'任务内容3',
+                        expSum:5,
+                        id:'03'
+                    },
+                    {
+                        btn:false,
+                        title:'任务4',
+                        content:'任务内容4',
+                        expSum:5,
+                        id:'04'
+                    },
+                    {
+                        btn:false,
+                        title:'任务5',
+                        content:'任务内容5',
+                        expSum:5,
+                        id:'05'
+                    },
+                    {
+                        btn:false,
+                        title:'任务6',
+                        content:'任务内容6',
+                        expSum:5,
+                        id:'06'
+                    },
+                    {
+                        btn:false,
+                        title:'任务7',
+                        content:'任务内容7',
+                        expSum:5,
+                        id:'07'
+                    },
+                    {
+                        btn:false,
+                        title:'任务8',
+                        content:'任务内容8',
+                        expSum:5,
+                        id:'08'
+                    },
+                ]
             }
         },
         methods:{
@@ -26,8 +83,35 @@
                     delta:1
                 })
             },
-            qds(da){
-                console.log(da)
+            async qds(index,item){
+                if(this.list[index].btn==true) return
+                let res = await this.$http.post('/userShare/insert',{rwId:item.id})
+                if(res.s == 1){
+                    this.list[index].btn = true
+                    let start = new Date(
+                        new Date(new Date().toLocaleDateString()).getTime()
+                    )
+                    let clearTime = start.getTime()+1000 * 60 * 60 * 24
+                    uni.setStorageSync("clearTime", clearTime);
+                    uni.setStorage({
+                        key: 'task',
+                        data: this.list
+                    })
+                }else{
+                    console.log(res)
+                }
+            }
+        },
+        created(){
+            const value = uni.getStorageSync('task')
+            const clears = uni.getStorageSync("clearTime")
+            if(clears-value<=0){
+                uni.clearStorageSync('clearTime')
+            }
+            const time = new Date(new Date().getTime());
+
+            if(value){
+                Object.assign(this.list,value)
             }
         }
     }

@@ -37,6 +37,7 @@
             iv: e.mp.detail.iv,
           }
           // this.$store.commit('SET_PERSONAL',formdata)
+          console.log(formdata)
           let data = await this.$http.post('/memberinfo',formdata)
           console.log(data)
           if(data.s==1){

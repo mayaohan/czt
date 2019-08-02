@@ -3,21 +3,23 @@
         <div class="header">
             <img src="/static/bg.png" alt="" mode="widthFix">
             <div class="bottomHeader">
-                <div class="rand"></div>
+                <div class="rand">
+                    <img :src="userInfo.avatarUrl" alt="">
+                </div>
                 <div class="box">
-                    <div v-if="shifouniubi" class="niubi">
-                        <p class="mingci">10</p>
+                    <div v-if="mingci!=0" class="niubi">
+                        <p class="mingci">{{mingci}}</p>
                         <img src="/static/nb.png" alt="" mode="widthFix">
                     </div>
                     <div v-else class="song">未上榜</div>
 
                     <div class="textBox left_right_center">
-                        <div class="font left_right_center">姓氏名谁</div>
+                        <div class="font left_right_center">{{userInfo.name}}</div>
                         <div class="shu"></div>
                         <div class="font left_right_center">
                             已有积分
                             <div class="jifen">
-                                <img src="/static/yx.png" alt="">666
+                                <img src="/static/yx.png" alt="">{{userInfo.expSum}}
                             </div>
                         </div>
                     </div>
@@ -31,9 +33,84 @@
                     <span class="font">已邀请好友</span>
                 </div>
             </div>
+            
+
+            <div class="contenter" v-for="(item,idc) in friendList" :key="item.id">
+                <div class="item column_center_center" v-if="idc==0">
+                    <div class="head">
+                        <div class="box"></div>
+                        <div class="lingjie">
+                            <img src="/static/lj.png" alt="" mode="widthFix">
+                            <div class="font">{{idc+1}}</div>
+                        </div>
+                    </div>
 
 
-            <div class="item column_center_center">
+                    <div class="zhanwei"></div>
+                    <p class="t22">{{item.name}}</p>
+                    <p class="t22">
+                        <span>{{item.expSum}}</span>
+                        <img :src="item.avatarUrl" alt="" style="position:relative;top:7upx;">
+                    </p>
+                </div>
+
+                <div class="item column_center_center" v-if="idc==1">
+                    <div class="head">
+                        <div class="box"></div>
+                        <div class="lingjie">
+                            <img src="/static/lj2.png" alt="" mode="widthFix">
+                            <div class="font">{{idc+1}}</div>
+                        </div>
+                    </div>
+
+                    <div class="zhanwei"></div>
+                    <p class="t22">{{item.name}}</p>
+                    <p class="t22">
+                        <span>{{item.expSum}}</span>
+                        <img :src="item.avatarUrl" alt="" style="position:relative;top:7upx;">
+                    </p>
+                </div>
+
+                <div class="item column_center_center" v-if="idc==2">
+                    <div class="head">
+                        <div class="box"></div>
+                        <div class="lingjie">
+                            <img src="/static/lj3.png" alt="" mode="widthFix">
+                            <div class="font">{{idc+1}}</div>
+                        </div>
+                    </div>
+
+                    <div class="zhanwei"></div>
+                    <p class="t22">{{item.name}}</p>
+                    <p class="t22">
+                        <span>{{item.expSum}}</span>
+                        <img :src="item.avatarUrl" alt="" style="position:relative;top:7upx;">
+                    </p>
+                </div>
+
+                <div class="item column_center_center" v-if="idc>2">
+                    <div class="head">
+                        <div class="box"></div>
+                        <div class="rand">
+                            <div class="font">{{idc+1}}</div>
+                            <!-- <img src="/static/lj3.png" alt="" mode="widthFix"> -->
+                        </div>
+                    </div>
+
+                    <div class="zhanwei"></div>
+                    <p class="t22">{{item.name}}</p>
+                    <p class="t22">
+                        <span>{{item.expSum}}</span>
+                        <img :src="item.avatarUrl" alt="" style="position:relative;top:7upx;">
+                    </p>
+                </div>
+
+            </div>
+
+
+
+            
+            <!-- <div class="item column_center_center">
                 <div class="head">
                     <div class="box"></div>
                     <div class="lingjie">
@@ -88,7 +165,6 @@
                     <div class="box"></div>
                     <div class="rand">
                         <div class="font">4</div>
-                        <!-- <img src="/static/lj3.png" alt="" mode="widthFix"> -->
                     </div>
                 </div>
 
@@ -98,10 +174,10 @@
                     <span>1234</span>
                     <img src="/static/yx.png" alt="" style="position:relative;top:7upx;">
                 </p>
-            </div>
-            <div class="footer left_right_center">
+            </div> -->
+            <!-- <div class="footer left_right_center">
                 <div class="btns left_right_center">查看更多</div>
-            </div>
+            </div> -->
         </div>
 
 
@@ -113,18 +189,18 @@
                 </div>
             </div>
 
-            <div class="itemFlex left_right_center" v-for="ob in 10" :key="ob">
-                <div class="num left_right_center">1</div>
+            <div class="itemFlex left_right_center" v-for="(ob,idx) in chinaList" :key="ob.id">
+                <div class="num left_right_center">{{idx}}</div>
                 <div class="img left_right_center"><img src="/static/yx.png" alt="" mode="widthFix"></div>
-                <div class="equma">收费收费的</div>
-                <div class="fen">1231231</div>
+                <div class="equma">{{ob.name}}</div>
+                <div class="fen">{{ob.expSum}}</div>
                 <div class="icon left_right_center"><img src="/static/yx.png" alt="" mode="widthFix"></div>
             </div>
 
 
-            <div class="footer left_right_center">
+            <!-- <div class="footer left_right_center">
                 <div class="btns left_right_center">查看更多</div>
-            </div>
+            </div> -->
         </div>
         
     </div>
@@ -134,7 +210,17 @@
     export default {
         data(){
             return {
-                shifouniubi:false
+                shifouniubi:true,
+                chinaList:[],
+                friendList:[],
+            }
+        },
+        computed:{
+            userInfo(){
+                return this.$store.state.memberInfo
+            },
+            mingci(){
+                return this.chinaList.findIndex(e=>e.id==this.userInfo.id)+1
             }
         },
         methods:{
@@ -143,9 +229,11 @@
                 let resd = await this.$http.post('/memberinfo/getRankingByInviter')//获取自己邀请好友排名
                 if(res.s == 1){
                     console.log(res)
+                    this.chinaList = res.d
                 }
                 if(resd.s == 1){
                     console.log(resd)
+                    this.friendList = resd.d
                 }
             }
         },

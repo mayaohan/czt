@@ -18,11 +18,12 @@
 
         <e-dialog
 			:show="ent.show"
+            :exp-sum="expSum_single"
 			:img-url="ent.imgUrl"
 			@handle="ent_ov"
 		>
 			<div style="width:100%;" class="text-center">
-				<p class="t34 cont">兑换此奖品消耗<span class="huang">2000积分</span></p>
+				<p class="t34 cont">兑换此奖品消耗<span class="huang">{{expSum_single}}积分</span></p>
 				<p class="t34 cont">并达到<span class="huang">10连胜</span>，确认兑换吗？</p>
 			</div>
 		</e-dialog>
@@ -56,13 +57,15 @@
                     id:'',
                     point:''
                 },
+                expSum_single:''
 			}
 		},
         methods:{
             env_change(data){
                 this.jpParam.id = data.id
                 this.jpParam.point = data.point
-				this.ent.show = true
+                this.ent.show = true
+                this.expSum_single = data.point
             },
             ent_ov(data){
                 this.ent.show = false

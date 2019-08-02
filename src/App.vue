@@ -11,7 +11,6 @@
 		},
 		created(){
 			const value = wx.getStorageSync('memberInfo')
-			console.log(value)
 			if(value){
 				this.$store.commit('UP_memberInfo', value)
 			}
