@@ -54,7 +54,7 @@
                 </div>
             </div> -->
             <div class="gengduo">
-                <div class="btns">查看更多</div>
+                <div class="btns" @click="add">查看更多</div>
             </div>
         </div>
 
@@ -83,7 +83,13 @@
         components:{EHeader},
         data(){
             return {
-                list:[]
+                list:[],
+                param:{
+                    pageNum:1,
+                    pageSize:10
+                },
+                flag:false,
+                navigateLastPage:0
             }
         },
         computed:{
@@ -93,6 +99,7 @@
         },
         filters:{
             formatTime (number) {
+                console.log(number)
                 let format = 'Y年M月D日 h:m:s'
                 let time = new Date(number)
                 console.log(time)
@@ -119,11 +126,21 @@
         },
         methods:{
             async zj(){
-                let res = await this.$http.post('/userWager/list')
+                this.flag = true
+                let res = await this.$http.post('/userWager/list',this.param)
                 if(res.s == 1){
-                    this.list = res.d
+                    this.list = this.list.concat(res.d.list)
+                    this.$forceUpdate()
+                    this.flag = false
+                    this.navigateLastPage = res.d.navigateLastPage;
                 }
             },
+            add(){
+                if(this.flag) return
+                this.param.pageNum++
+                if(this.param.pageNum>this.navigateLastPage) return
+                this.zj()
+            }
         },
         onShow(){
             this.zj()

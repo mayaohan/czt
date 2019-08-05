@@ -1,9 +1,12 @@
 <script>
 	export default {
 		onLaunch: function() {
-			console.log('App Launch')
+			let res = wx.getLaunchOptionsSync();
+			console.log(res)
 		},
 		onShow: function() {
+			let res = wx.getLaunchOptionsSync();
+			console.log(res)
 			console.log('App Show')
 		},
 		onHide: function() {

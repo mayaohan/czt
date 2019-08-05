@@ -2,10 +2,11 @@
     <div class="content">
         <div style="width:100%;height:26rpx;"></div>
 
-        <div class="item" v-for="(obj,idx) in list" :key="obj.id">
+        <div class="item" v-for="(obj,idx) in list" :key="obj.id" @click="qds(idx,obj)">
             <p class="t34">{{obj.title}}</p>
             <p class="t24 bottom">{{obj.content}} <span style="padding-left:28rpx;"> 积分+{{obj.expSum}}</span></p>
-            <div :class="[obj.btn?'active':'','right']" @click="qds(idx,obj)">签到</div>
+            <div v-if="obj.btn" class="active right">{{obj.title}}</div>
+            <button style="border:0"  class="right fx" open-type='share' @click="qds(idx,obj)">{{obj.title}}</button>
         </div>
         <div class="zhanwei"></div>
         <div class="fanhui" @click="back">返回</div>
@@ -15,6 +16,11 @@
 <script>
     export default {
         name:'child',
+        computed:{
+            userInfo(){
+				return this.$store.state.memberInfo
+			},
+        },
         data(){
             return {
                 list:[
@@ -74,7 +80,8 @@
                         expSum:5,
                         id:'08'
                     },
-                ]
+                ],
+                emid:''
             }
         },
         methods:{
@@ -85,6 +92,7 @@
             },
             async qds(index,item){
                 if(this.list[index].btn==true) return
+                this.emid = item.id
                 let res = await this.$http.post('/userShare/insert',{rwId:item.id})
                 if(res.s == 1){
                     this.list[index].btn = true
@@ -97,22 +105,33 @@
                         key: 'task',
                         data: this.list
                     })
+                    this.$forceUpdate()
                 }else{
                     console.log(res)
                 }
             }
         },
+        onShareAppMessage(options) {
+            return {
+                title: `/pages/index/index?id=${this.userInfo.id}&emid=${this.emid}`,
+                path:`/pages/index/index?id=${this.userInfo.id}&emid=${this.emid}`,
+
+            }
+        },
         created(){
             const value = uni.getStorageSync('task')
             const clears = uni.getStorageSync("clearTime")
-            if(clears-value<=0){
-                uni.clearStorageSync('clearTime')
-            }
             const time = new Date(new Date().getTime());
-
-            if(value){
-                Object.assign(this.list,value)
+            if(clears-time<=0){
+                uni.removeStorageSync('clearTime')
+                uni.removeStorageSync('task')
+            }else{
+                if(value){
+                    Object.assign(this.list,value)
+                }
             }
+
+            
         }
     }
 </script>
@@ -167,5 +186,11 @@
         color:rgba(252,202,47,1);
         text-align:center;
 
+    }
+    .fx {
+        border:0;
+        background:rgba(226,197,227,1);
+        color: rgba(255,255,255,1);
+        border-radius:6rpx;
     }
 </style>
