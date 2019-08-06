@@ -22,7 +22,7 @@
         <div class="or" v-if="getUser">
             <div class="bq">
                 <span class="con t28"><i style="display:inline-block" class="icon-search iconfont"></i>{{userInfo.expSum}}</span>
-                <span class="con t28">二六个字称号</span>
+                <span class="con t28" v-if="topWinTime>=0">{{topWinTime | getCH}}</span>
             </div>
         </div>
     </div>
@@ -39,13 +39,31 @@
         },
 		computed:{
 			getUser(){
-                console.log(this.$store.state.memberInfo.id)
 				return this.$store.state.memberInfo.id!=undefined
             },
             userInfo(){
 				return this.$store.state.memberInfo
-			}
-		},
+            },
+            topWinTime(){
+                return this.$store.state.memberInfo.topWinTime
+            }
+            
+        },
+        filters:{
+            getCH(a){
+                if(a>10) return '中本聪的传人'
+                if(a == 10) return '高级庄家'
+                if(a == 9) return '中级庄家'
+                if(a == 8) return '初级庄家'
+                if(a == 7) return '高级大佬'
+                if(a == 6) return '中级大佬'
+                if(a == 5) return '初级大佬'
+                if(a == 4) return '高级韭菜'
+                if(a == 3) return '中级韭菜'
+                if(a <= 2) return '初级韭菜'
+                
+            }
+        },
         data(){
             return {
 				userIfo:{

@@ -34,7 +34,7 @@
                 </div>
             </div>
             
-
+            <p v-if="friendList.length==0" class="text-center t22 fct" style="padding:20upx 0;width:100%;">暂无数据</p>
             <div class="contenter" v-for="(item,idc) in friendList" :key="item.id">
                 <div class="item column_center_center" v-if="idc==0">
                     <div class="head">
@@ -190,13 +190,13 @@
             </div>
 
             <div class="itemFlex left_right_center" v-for="(ob,idx) in chinaList" :key="ob.id">
-                <div class="num left_right_center">{{idx}}</div>
+                <div class="num left_right_center">{{idx+1}}</div>
                 <div class="img left_right_center"><img src="/static/yx.png" alt="" mode="widthFix"></div>
                 <div class="equma">{{ob.name}}</div>
                 <div class="fen">{{ob.expSum}}</div>
                 <div class="icon left_right_center"><img src="/static/yx.png" alt="" mode="widthFix"></div>
             </div>
-
+            <p v-if="chinaList.length==0" class="text-center t22 fct" style="padding:20upx 0;width:100%;">暂无数据</p>
 
             <!-- <div class="footer left_right_center">
                 <div class="btns left_right_center">查看更多</div>

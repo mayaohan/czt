@@ -2,7 +2,8 @@
     <div class="dialogs" v-if="show" key="box1">
         <div class="bg">
             <div class="top">
-                <img :src="imgUrl" alt="" mode="widthFix">
+                <img class="url1" :src="imgUrl" alt="" mode="widthFix">
+                <img class="url2" :src="imgUrls" alt="" mode="widthFix">
             </div>
             <div class="content">
                 <slot></slot>
@@ -20,6 +21,10 @@
         name:'EDialog',
         props:{
             imgUrl:{
+                type:String,
+                default:'http://xcx.jyan.vip/2/index/ren.png'
+            },
+            imgUrls:{
                 type:String,
                 default:'http://xcx.jyan.vip/2/index/ren.png'
             },
@@ -60,8 +65,21 @@
                 top:-69rpx;
                 left:50%;
                 margin-left:-69rpx;
-                img{
+                .url1{
                     width:100%;
+                    position:absolute;
+                    top:50%;
+                    left:50%;
+                    transform:translate(-50%,-50%);
+                }
+                .url2{
+                    width:80%;
+                    position:absolute;
+                    top:-20upx;
+                    top:50%;
+                    left:50%;
+                    transform:translate(-50%,-50%);
+                    z-index:9999
                 }
             }
             .content{

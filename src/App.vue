@@ -5,9 +5,9 @@
 			console.log(res)
 		},
 		onShow: function() {
-			let res = wx.getLaunchOptionsSync();
-			console.log(res)
-			console.log('App Show')
+			// let res = wx.getLaunchOptionsSync();
+			// console.log(res)
+			// console.log('App Show')
 		},
 		onHide: function() {
 			console.log('App Hide')

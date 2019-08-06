@@ -70,23 +70,13 @@
 			<div class="item left_right_center">2019/5/5 12:30</div>
 		</div>
 
-		<div class="banner"></div>
+		<!-- <div class="banner"></div> -->
 		<e-dialog
 			:show="param.show"
 			:img-url="param.imgUrl"
 			@handle="cuntry"
 		>
 			{{param.title}}
-		</e-dialog>
-		<e-dialog
-			:show="ent.show"
-			:img-url="ent.imgUrl"
-			@handle="ent_ov"
-		>
-			<div style="width:100%;" class="text-center">
-				<p class="t34 cont">兑换此奖品消耗<span class="huang">2000积分</span></p>
-				<p class="t34 cont">并达到<span class="huang">10连胜</span>，确认兑换吗？</p>
-			</div>
 		</e-dialog>
 
 	</view>
@@ -111,10 +101,6 @@
 					title:'',
 					flag:0
 				},
-				ent:{
-					show:false,
-					imgUrl:'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eonbb6BjKOJZJFyBtgraXiawVHA3sW51Cywx8jv8ysdd7vsia3WkpOpstMUc4Mq0dnzxaLT28saIwibw/132',
-				},
 				isData:{
 					done: "0",
 					downCount: 0,
@@ -123,6 +109,12 @@
 					upCount: 0,
 					wagerId: 0
 				},//模拟是否有数据
+				any:false,
+			}
+		},
+		onLoad(query){
+			if(query.id){
+				this.$store.commit('OUT_ID',query.id)
 			}
 		},
 		computed:{
@@ -160,11 +152,22 @@
 						}
 					}else{
 						console.log('积分不足')
+						if(!this.any){
+							this.any = true
+							this.param.title = '积分不足，去做任务吧？'
+						}else{
+							uni.switchTab({
+								url: '/pages/reward/index'
+							})
+							this.any = false
+							this.param.show = false
+						}
 					}
 					
 					// this.param.show = false
 				}else{
 					this.param.show = false
+					this.any = false
 				}
 			},
 			upAndDown(data){
@@ -174,8 +177,10 @@
 				}
 				if(data){
 					this.param.title = '确认下注涨吗？'
+					this.param.imgUrl = '/static/1.png'
 				}else{
 					this.param.title = '确认下注跌吗？'
+					this.param.imgUrl = '/static/0.png'
 				}
 				this.param.flag = data
 				this.param.show = true
@@ -188,15 +193,6 @@
 				uni.switchTab({
 					url: '/pages/reward/index'
 				})
-			},
-			ent_ov(data){
-				if(data){
-					setTimeout(e=>{
-						this.ent.show = false
-					},1000)
-				}else{
-					this.ent.show = false
-				}
 			},
 			clock(){
 				let second = this.isData.secCount

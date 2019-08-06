@@ -2,13 +2,14 @@
     <div class="content">
         <div style="width:100%;height:26rpx;"></div>
 
-        <div class="item" v-for="(obj,idx) in list" :key="obj.id" @click="qds(idx,obj)">
+        <div class="item" v-for="(obj,idx) in list" :key="obj.id">
             <p class="t34">{{obj.title}}</p>
             <p class="t24 bottom">{{obj.content}} <span style="padding-left:28rpx;"> 积分+{{obj.expSum}}</span></p>
-            <div v-if="obj.btn" class="active right">{{obj.title}}</div>
-            <button style="border:0"  class="right fx" open-type='share' @click="qds(idx,obj)">{{obj.title}}</button>
+            <div v-if="obj.btn&&idx==0" class="active right fx">{{obj.title}}</div>
+            <div v-if="(!obj.btn)&&idx==0" class="right fx" @click="qds(idx,obj)">{{obj.int}}</div>
+            <button v-if="idx!=0" style="border:0"  class="right fx" open-type='share'>{{obj.int}}</button>
         </div>
-        <div class="zhanwei"></div>
+        <!-- <div class="zhanwei"></div> -->
         <div class="fanhui" @click="back">返回</div>
     </div>
 </template>
@@ -26,60 +27,45 @@
                 list:[
                     {
                         btn:false,
-                        title:'任务1',
-                        content:'任务内容1',
+                        title:'签到',
+                        int:'签到',
+                        content:'每日签到',
                         expSum:5,
                         id:'01'
                     },
                     {
                         btn:false,
-                        title:'任务2',
-                        content:'任务内容2',
+                        title:'分享',
+                        int:'领取',
+                        content:'当日首次分享',
                         expSum:5,
                         id:'02'
                     },
                     {
                         btn:false,
-                        title:'任务3',
-                        content:'任务内容3',
+                        title:'分享',
+                        int:'领取',
+                        content:'当日3次分享',
                         expSum:5,
+                        id:'02'
+                    },
+                    {
+                        btn:false,
+                        title:'注册',
+                        int:'领取',
+                        content:'分享用户注册成功每个',
+                        expSum:10,
                         id:'03'
                     },
                     {
                         btn:false,
-                        title:'任务4',
-                        content:'任务内容4',
-                        expSum:5,
+                        title:'累计',
+                        int:'领取',
+                        content:'累计每5个用户注册成功',
+                        expSum:20,
                         id:'04'
                     },
-                    {
-                        btn:false,
-                        title:'任务5',
-                        content:'任务内容5',
-                        expSum:5,
-                        id:'05'
-                    },
-                    {
-                        btn:false,
-                        title:'任务6',
-                        content:'任务内容6',
-                        expSum:5,
-                        id:'06'
-                    },
-                    {
-                        btn:false,
-                        title:'任务7',
-                        content:'任务内容7',
-                        expSum:5,
-                        id:'07'
-                    },
-                    {
-                        btn:false,
-                        title:'任务8',
-                        content:'任务内容8',
-                        expSum:5,
-                        id:'08'
-                    },
+                    
                 ],
                 emid:''
             }
@@ -93,9 +79,10 @@
             async qds(index,item){
                 if(this.list[index].btn==true) return
                 this.emid = item.id
-                let res = await this.$http.post('/userShare/insert',{rwId:item.id})
+                let res = null;
+                if(index==0) res = await this.$http.post('/userShare/insert',{rwId:item.id})
                 if(res.s == 1){
-                    this.list[index].btn = true
+                    if(index==0) this.list[index].btn = true
                     let start = new Date(
                         new Date(new Date().toLocaleDateString()).getTime()
                     )
@@ -113,8 +100,8 @@
         },
         onShareAppMessage(options) {
             return {
-                title: `/pages/index/index?id=${this.userInfo.id}&emid=${this.emid}`,
-                path:`/pages/index/index?id=${this.userInfo.id}&emid=${this.emid}`,
+                title: `分享给好友`,
+                path:`/pages/index/index?id=${this.userInfo.id}`,
 
             }
         },

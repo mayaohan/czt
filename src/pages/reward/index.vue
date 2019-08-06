@@ -14,12 +14,13 @@
             </div>
         </div>
 
-        <div class="zhanwei"></div>
+        <!-- <div class="zhanwei"></div> -->
 
         <e-dialog
 			:show="ent.show"
             :exp-sum="expSum_single"
 			:img-url="ent.imgUrl"
+            :img-urls="ent.imgUrls"
 			@handle="ent_ov"
 		>
 			<div style="width:100%;" class="text-center">
@@ -32,7 +33,7 @@
 
 <script>
     import EHeader from '@/component/header'
-    import EDialog from '@/component/dialog'
+    import EDialog from '@/component/dialog_teshu'
     export default {
         components:{EHeader,EDialog},
         computed:{
@@ -50,18 +51,20 @@
 			return {
 				ent:{
 					show:false,
-					imgUrl:'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eonbb6BjKOJZJFyBtgraXiawVHA3sW51Cywx8jv8ysdd7vsia3WkpOpstMUc4Mq0dnzxaLT28saIwibw/132',
+					imgUrl:'/static/d.png',
+                    imgUrls:''
                 },
                 list:[],
                 jpParam:{
                     id:'',
-                    point:''
+                    point:'',
                 },
                 expSum_single:''
 			}
 		},
         methods:{
             env_change(data){
+                this.ent.imgUrls = '/static/bt'+data.id+'.png'
                 this.jpParam.id = data.id
                 this.jpParam.point = data.point
                 this.ent.show = true

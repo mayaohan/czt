@@ -24,6 +24,8 @@
                 </div>
             </div>
 
+            <p v-if="list.length==0" class="text-center t22 fct" style="padding:20upx 0">暂无数据</p>
+
             <!-- <div class="item">
                 <div class="up">
                     <div class="left">买涨</div>
@@ -53,7 +55,7 @@
                     </div>
                 </div>
             </div> -->
-            <div class="gengduo">
+            <div class="gengduo" v-if="navigateLastPage!=0">
                 <div class="btns" @click="add">查看更多</div>
             </div>
         </div>
@@ -73,7 +75,7 @@
             </div>
         </div>
 
-        <div class="zhanwei"></div>
+        <!-- <div class="zhanwei"></div> -->
     </div>
 </template>
 

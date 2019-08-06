@@ -19,6 +19,11 @@
       this.backurl = option.backurl
       this.inviter = option.inviter
     },
+    computed:{
+      outid(){
+        return
+      }
+    },
     methods: {
       opensys(){
         wx.scanCode({
@@ -31,10 +36,14 @@
       async getUserInfo(e){
         if (e.mp.detail.errMsg == 'getuserinfo:fail user deny') {
         } else {
+          // inviter
           let formdata = {
             code: this.code,
             encryptData: e.mp.detail.encryptedData,
             iv: e.mp.detail.iv,
+          }
+          if(this.outid!=null){
+            formdata.inviter = outid
           }
           // this.$store.commit('SET_PERSONAL',formdata)
           console.log(formdata)

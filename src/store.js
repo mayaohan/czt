@@ -28,6 +28,7 @@ const store = new Vuex.Store({
             topWinTime: 0,
             sessionid: "",
             type: "i",
+            outId:null
         },
 
     },
@@ -61,6 +62,10 @@ const store = new Vuex.Store({
                 key: 'memberInfo',
                 data: state.memberInfo
             })
+        },
+        // 邀请人id
+        OUT_ID(state,data){
+            state.outId = data
         }
     },
     action:{
