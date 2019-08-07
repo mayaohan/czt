@@ -1,7 +1,23 @@
 <template>
     <div class="content">
         <e-header></e-header>
-        <div class="cont">
+        
+        <div class="sheng">
+            <div class="item blue">
+                <div class="up">{{userInfo.topWinTime}}</div>
+                <div class="down">最高连胜</div>
+            </div>
+            <div class="item yellow">
+                <div class="up">{{userInfo.sumWinTime}}</div>
+                <div class="down">总胜</div>
+            </div>
+            <div class="item red">
+                <div class="up">{{userInfo.sumFailTime}}</div>
+                <div class="down">总负</div>
+            </div>
+        </div>
+
+        <div class="cont" style="min-height:600upx;">
             <div class="title">
                 <span class="font">个人战绩</span>
             </div>
@@ -59,21 +75,9 @@
                 <div class="btns" @click="add">查看更多</div>
             </div>
         </div>
+        <button style="border:0"  class="fx_btns" open-type='share'>邀请好友</button>
 
-        <div class="sheng">
-            <div class="item blue">
-                <div class="up">{{userInfo.topWinTime}}</div>
-                <div class="down">最高连胜</div>
-            </div>
-            <div class="item yellow">
-                <div class="up">{{userInfo.sumWinTime}}</div>
-                <div class="down">总胜</div>
-            </div>
-            <div class="item red">
-                <div class="up">{{userInfo.sumFailTime}}</div>
-                <div class="down">总负</div>
-            </div>
-        </div>
+        
 
         <!-- <div class="zhanwei"></div> -->
     </div>
@@ -144,6 +148,13 @@
                 this.zj()
             }
         },
+        onShareAppMessage(options) {
+            return {
+                title: `分享给好友`,
+                path:`/pages/index/index?id=${this.userInfo.id}`,
+
+            }
+        },
         onShow(){
             this.zj()
         }
@@ -163,24 +174,24 @@
         flex-direction: row;
         display:flex!important;
         align-items:center;
-        justify-content:space-around;
+        justify-content:space-between;
         flex-wrap:wrap;
         .item{
             width:216upx;
             height:118upx;
             border-radius:4upx;
             .up{
-                height:56upx;
+                height:68upx;
                 font-size:40upx;
                 font-style:italic;
                 color:#fff;
                 font-family:Roboto-BlackItalic;
                 font-weight:700;
                 text-align:center;
-                line-height:52upx;
+                line-height:68upx;
             }
             .down{
-                height:56upx;
+                height:50upx;
                 font-size:22upx;
                 font-family:PingFangSC-Thin;
                 color:rgba(255,255,255,1);
@@ -190,32 +201,32 @@
         }
         .blue{
             .up{
-                background:linear-gradient(342deg,rgba(70,137,216,1) 0%,rgba(155,202,255,1) 100%);
+                background:linear-gradient(342deg,#4689D8 0%,#9BCAFF 100%);
             }
             .down{
-                background:rgba(83, 141, 232, 1);
+                background:#538DE8;
             }
         }
         .yellow{
             .up{
-                background:linear-gradient(342deg,rgba(70,137,216,1) 0%,rgba(155,202,255,1) 100%);
+                background:linear-gradient(342deg,#FDE372 0%,#FCB52F 100%);
             }
             .down{
-                background:rgba(83, 141, 232, 1);
+                background:#F7AC20;
             }
         }
         .red{
             .up{
-                background:linear-gradient(342deg,rgba(70,137,216,1) 0%,rgba(155,202,255,1) 100%);
+                background:linear-gradient(342deg,#F78B48 0%,#FFB372 100%);
             }
             .down{
-                background:rgba(83, 141, 232, 1);
+                background:#F78339;
             }
         }
     }
     .cont{
         width:722upx;
-        margin:20upx 14upx;
+        margin:0upx 14upx;
         background:#fff;
         min-height:50upx;
         padding:1upx 26upx;
@@ -312,5 +323,16 @@
                 padding:0 64upx;
             }
         }
+    }
+    .fx_btns{
+        width:720upx;
+        margin:56upx auto;
+        line-height:140upx;
+        font-size:52upx;
+        font-family:PingFangSC-Semibold;
+        font-weight:600;
+        color:rgba(0,0,0,1);
+        border-radius:0;
+        background:#FCB52F;
     }
 </style>

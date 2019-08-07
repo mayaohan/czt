@@ -7,7 +7,7 @@
             <p class="t24 bottom">{{obj.content}} <span style="padding-left:28rpx;"> 积分+{{obj.expSum}}</span></p>
             <div v-if="obj.btn&&idx==0" class="active right fx">{{obj.title}}</div>
             <div v-if="(!obj.btn)&&idx==0" class="right fx" @click="qds(idx,obj)">{{obj.int}}</div>
-            <button v-if="idx!=0" style="border:0"  class="right fx" open-type='share'>{{obj.int}}</button>
+            <button v-if="idx!=0&&obj.int" style="border:0"  class="right fx" open-type='share'>{{obj.int}}</button>
         </div>
         <!-- <div class="zhanwei"></div> -->
         <div class="fanhui" @click="back">返回</div>
@@ -27,7 +27,7 @@
                 list:[
                     {
                         btn:false,
-                        title:'签到',
+                        title:'每日签到',
                         int:'签到',
                         content:'每日签到',
                         expSum:5,
@@ -35,7 +35,7 @@
                     },
                     {
                         btn:false,
-                        title:'分享',
+                        title:'分享有喜',
                         int:'领取',
                         content:'当日首次分享',
                         expSum:5,
@@ -43,24 +43,16 @@
                     },
                     {
                         btn:false,
-                        title:'分享',
-                        int:'领取',
-                        content:'当日3次分享',
-                        expSum:5,
-                        id:'02'
-                    },
-                    {
-                        btn:false,
-                        title:'注册',
-                        int:'领取',
+                        title:'好友应战',
+                        int:false,
                         content:'分享用户注册成功每个',
                         expSum:10,
                         id:'03'
                     },
                     {
                         btn:false,
-                        title:'累计',
-                        int:'领取',
+                        title:'一呼百应',
+                        int:false,
                         content:'累计每5个用户注册成功',
                         expSum:20,
                         id:'04'

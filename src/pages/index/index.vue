@@ -44,7 +44,7 @@
 				<div class="font">赢取的积分将在下注日晚9点15返回到您的账户 明日下午13:00后可参与心的一轮竞猜</div>
 			</div>
 			<div class="jd">
-				<div class="lv" :style="{width:width}"></div>
+				<div class="lv" :style="{width:width+'%'}"></div>
 				<div class="ho"></div>
 			</div>
 			<div class="timers left_right_center" v-if="isData.done=='0'">
@@ -64,10 +64,15 @@
 			</div>
 		</div>
 
-		<div class="title_b t24 left_right_center">
-			<div class="item left_right_center">恭喜ID：<span class="huang">毛毛</span></div>
-			<div class="item left_right_center">兑换二等奖：<span class="huang">LTC一枚</span></div>
-			<div class="item left_right_center">2019/5/5 12:30</div>
+		<div class="title_b t24 relative">
+			<div class="absolute every" :style="{'left':left+'px'}">
+				<span v-for="obj in noticeContent" :key="obj.id">
+					<span class="item">恭喜ID：<span class="huang">{{obj.id}}</span></span>
+					<span class="item"><span class="huang"> {{obj.content}}</span></span>
+					<span class="item"><span class="huang"> {{obj.createDate}}</span></span>
+				</span>
+				
+			</div>
 		</div>
 
 		<!-- <div class="banner"></div> -->
@@ -85,6 +90,7 @@
 <script>
 	import EDialog from '@/component/dialog'
 	import EHeader from '@/component/header'
+import { clearInterval } from 'timers';
 	export default {
 		components:{EDialog,EHeader},
 		data() {
@@ -110,11 +116,17 @@
 					wagerId: 0
 				},//模拟是否有数据
 				any:false,
+				noticeContent:[],
+				left:375,
+				IS_THIS:true,
+
 			}
 		},
-		onLoad(query){
-			if(query.id){
-				this.$store.commit('OUT_ID',query.id)
+		onShow(){
+			this.IS_THIS = true
+			let res = wx.getLaunchOptionsSync();
+			if(res.query.id){
+				this.$store.commit('OUT_ID',res.query.id)
 			}
 		},
 		computed:{
@@ -129,9 +141,9 @@
 				let b = Number(this.isData.downCount)
 				let sum = Number(this.isData.upCount) + Number(this.isData.downCount)
 				if(sum>0&&a>0){
-					return parseInt(a/sum*100)+'%'
+					return parseInt(a/sum*100)
 				}else{
-					return '50%'
+					return 50
 				}
 			}
 		},
@@ -156,8 +168,8 @@
 							this.any = true
 							this.param.title = '积分不足，去做任务吧？'
 						}else{
-							uni.switchTab({
-								url: '/pages/reward/index'
+							uni.navigateTo({
+								url:`/pages/${data}/index`
 							})
 							this.any = false
 							this.param.show = false
@@ -195,80 +207,28 @@
 				})
 			},
 			clock(){
-				let second = this.isData.secCount
-				let day = Math.floor(second / 86400);//整数部分代表的是天；一天有24*60*60=86400秒 ；
-				second = second % 86400;//余数代表剩下的秒数；
-				let hour = Math.floor(second / 3600);//整数部分代表小时；
-				second %= 3600; //余数代表 剩下的秒数；
-				let minute = Math.floor(second / 60);
-				second %= 60;
-				this.hour = this.tow(hour)
-				this.min = this.tow(minute)
-				// let str = this.tow(day) + '<span class="time">天</span>'
-				// 	+ this.tow(hour) + '<span class="time">小时</span>'
-				// 	+ this.tow(minute) + '<span class="time">分钟</span>'
-				// 	+ this.tow(second) + '<span class="time">秒</span>';
-				// 	console.log(str)
-				// oSpan.innerHTML = str;
+				if(this.IS_THIS){
+					let second = this.isData.secCount
+					let day = Math.floor(second / 86400);//整数部分代表的是天；一天有24*60*60=86400秒 ；
+					second = second % 86400;//余数代表剩下的秒数；
+					let hour = Math.floor(second / 3600);//整数部分代表小时；
+					second %= 3600; //余数代表 剩下的秒数；
+					let minute = Math.floor(second / 60);
+					second %= 60;
+					this.hour = this.tow(hour)
+					this.min = this.tow(minute)
+					this.isData.secCount-=60
+					console.log(second)
+					// let str = this.tow(day) + '<span class="time">天</span>'
+					// 	+ this.tow(hour) + '<span class="time">小时</span>'
+					// 	+ this.tow(minute) + '<span class="time">分钟</span>'
+					// 	+ this.tow(second) + '<span class="time">秒</span>';
+					// 	console.log(str)
+					// oSpan.innerHTML = str;
+				}
 			},
 			tow(n) {
 				return n >= 0 && n < 10 ? '0' + n : '' + n;
-			},
-			location(){
-				let _this = this;
-				//获取定位
-				// uni.getLocation({
-				// 	type: 'wgs84',
-				// 	success(res) {
-				// 	  let {longitude,latitude} = res;
-				// 	  _this.longitude = res.longitude
-				// 	  _this.latitude = res.latitude
-				// 	  console.log(res)
-				// 	},
-				// 	fail(){
-				// 	  uni.showModal({
-				// 		title: '温馨提示',
-				// 		content: '获取定位失败，请前往设置打开定位权限',
-				// 		confirmText: '设置',
-				// 		success(res) {
-				// 		  if (res.confirm) {
-				// 			uni.openSetting({
-				// 			  success: function (res) {
-				// 				if (res.authSetting["scope.userLocation"]) {
-				// 				  uni.getLocation({
-				// 					type: 'wgs84',
-				// 					success(res) {
-				// 					  console.log(res)
-				// 					}
-				// 				  })
-				// 				}else{
-				// 				  uni.navigateBack({
-				// 					delta: 1
-				// 				  })
-				// 				}
-				// 			  }
-				// 			})
-				// 		  } else if (res.cancel) {
-				// 			console.log(111)
-				// 		  }
-				// 		}
-				// 	  })
-				// 	}
-				// })
-			},
-			userinfo(){
-				// uni.login({
-				// 	provider: 'weixin',
-				// 	success: (res)=> {
-				// 	  if (res.code) {
-				// 		//发起网络请求    
-				// 		this.code = res.code
-				// 		console.log('code:' + res.code)
-				// 	  } else {
-				// 		// console.log('获取用户登录态失败！' + res.errMsg)
-				// 	  }
-				// 	}
-				// });
 			},
 			login(){
 				wx.navigateTo({
@@ -279,15 +239,50 @@
 				let res = await this.$http.post('/userWager/getStatus')
 				if(res.s == 1){
 					Object.assign(this.isData,res.d)
-					console.log(this.isData)
+					this.clock()
+				}
+			},
+			async notice(){
+				let res = await this.$http.post('/notice/getList')
+				if(res.s == 1){
+					res.d.map(ob=>{
+						ob.createDate = new Date(ob.createDate).Format('yy-MM-dd hh:mm:ss')
+						return ob
+					})
+					this.noticeContent = res.d
+					this.noticeContent.push(res.d[0])
+					this.noticeContent.push(res.d[0])
+					this.noticeContent.push(res.d[0])
+					this.noticeContent.push(res.d[0])
+					this.noticeContent.push(res.d[0])
+					console.log(this.noticeContent)
+
+					
+				}
+			},
+			animate(){
+				if(this.IS_THIS){
+					let query = wx.createSelectorQuery();
+					let _this = this
+					query.select('.every').boundingClientRect(function (rect) {
+						
+						if(Math.abs(_this.left)-rect.width>100){
+							_this.left = 375
+						}else{
+							_this.left--
+						}
+					}).exec();
 				}
 			}
 		},
+		onHide(){
+			this.IS_THIS = false
+		},
 		mounted() {
-			this.location()
-			this.userinfo()
-			if(this.getUser) this.userStatus()
-			setInterval(this.clock, 1000);
+			this.notice()
+			this.userStatus()
+			setInterval(this.clock, 1000*60);
+			setInterval(this.animate, 30);
 		}
 	}
 </script>
@@ -323,9 +318,14 @@
 		height:66rpx;
 		background:rgba(247,206,78,0.2);
 		color:#DE9D21;
+		padding:0 20upx;
+		overflow:hidden;
+		.absolute{
+			line-height:66rpx;
+			white-space:nowrap;
+		}
 		.item{
-			width:33%;
-			
+			padding:0 10upx;
 		}
 	}
 	.middles{
@@ -392,6 +392,7 @@
 				box-shadow:0rpx 40rpx 52rpx -16rpx rgba(61,227,185,0.5);
 			}
 			.ho{
+				width:100%;
 				background:rgba(252,98,98,1);
 				box-shadow:0rpx 40rpx 52rpx -16rpx rgba(231,71,71,0.5);
 			}

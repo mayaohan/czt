@@ -3,43 +3,43 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "Title"
+				"navigationBarTitleText": "BTC猜涨跌"
 			}
 		},
 		{
 			"path": "pages/reward/index",
 			"style": {
-				"navigationBarTitleText": "Title"
+				"navigationBarTitleText": "奖品兑换"
 			}
 		},
 		{
 			"path": "pages/my/index",
 			"style": {
-				"navigationBarTitleText": "Title"
+				"navigationBarTitleText": "个人战绩"
 			}
 		},
 		{
 			"path": "pages/child/index",
 			"style": {
-				"navigationBarTitleText": "Title"
+				"navigationBarTitleText": "签到分享"
 			}
 		},
 		{
 			"path": "pages/ranking/index",
 			"style": {
-				"navigationBarTitleText": "Title"
+				"navigationBarTitleText": "积分排名"
 			}
 		},
 		{
 			"path": "pages/login/index",
 			"style": {
-				"navigationBarTitleText": "Title"
+				"navigationBarTitleText": "登录"
 			}
 		},
 		{
 			"path": "pages/address/index",
 			"style": {
-				"navigationBarTitleText": "Title"
+				"navigationBarTitleText": "信息填写"
 			}
 		}
 	],

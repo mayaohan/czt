@@ -21,7 +21,7 @@
     },
     computed:{
       outid(){
-        return
+        return this.$store.state.outId
       }
     },
     methods: {
@@ -43,7 +43,7 @@
             iv: e.mp.detail.iv,
           }
           if(this.outid!=null){
-            formdata.inviter = outid
+            formdata.inviter = this.outid
           }
           // this.$store.commit('SET_PERSONAL',formdata)
           console.log(formdata)

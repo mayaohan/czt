@@ -3,14 +3,14 @@
         <e-header></e-header>
         <div class="logos">
             <div class="item" v-for="obj in list" :key="obj.id">
-                <div class="icon" v-if="obj.num>0&&obj.point<=expSum&&obj.winTime<=topWinTime" @click="env_change(obj)">
+                <div class="icon" @click="env_change(obj)">
                     <img :src="'/static/bt'+obj.id+'.png'" alt="" mode="widthFix">
                     <div class="font left_right_center t28">兑换</div>
                 </div>
-                <div v-else class="icon action">
+                <!-- <div v-else class="icon action">
                     <img :src="'/static/bt'+obj.id+'.png'" alt="" mode="widthFix">
                     <div class="font left_right_center t28">兑换</div>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -73,9 +73,29 @@
             ent_ov(data){
                 this.ent.show = false
                 if(data){
-                    wx.navigateTo({
-                        url: `/pages/address/index?id=${this.jpParam.id}&point=${this.jpParam.point}`
+                    this.$http.post('/userGoods/getStatus',{goodsId:this.jpParam.id}).then(res=>{
+                        if(res.s==1){
+                            uni.navigateTo({
+                                url: `/pages/address/index?id=${this.jpParam.id}&point=${this.jpParam.point}`
+                            })
+                        }else{
+                            let num = res.m
+                            let message = ''
+                            if(num=='nonum') message = '数目不足，不能兑换'
+                            if(num=='nopoint') message = '积分不足'
+                            if(num=='nowintime') message = '连胜次数不足'
+                            uni.showToast({
+                                title: message,
+                                icon: 'none',
+                                duration: 2000
+                            })
+
+                        }
+                        
+                    }).catch(e=>{
+                        console.log(e)
                     })
+                    
                 }
             },
             async jp(){

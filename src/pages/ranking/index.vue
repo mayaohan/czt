@@ -35,10 +35,12 @@
             </div>
             
             <p v-if="friendList.length==0" class="text-center t22 fct" style="padding:20upx 0;width:100%;">暂无数据</p>
-            <div class="contenter" v-for="(item,idc) in friendList" :key="item.id">
+            <div class="contenter" v-for="(item,idc) in friendList" :key="item.id" style="width:33%">
                 <div class="item column_center_center" v-if="idc==0">
                     <div class="head">
-                        <div class="box"></div>
+                        <div class="box">
+                            <img :src="item.avatarUrl" alt="">
+                        </div>
                         <div class="lingjie">
                             <img src="/static/lj.png" alt="" mode="widthFix">
                             <div class="font">{{idc+1}}</div>
@@ -50,13 +52,15 @@
                     <p class="t22">{{item.name}}</p>
                     <p class="t22">
                         <span>{{item.expSum}}</span>
-                        <img :src="item.avatarUrl" alt="" style="position:relative;top:7upx;">
+                        <img src="/static/yx.png" alt="" style="position:relative;top:7upx;">
                     </p>
                 </div>
 
                 <div class="item column_center_center" v-if="idc==1">
                     <div class="head">
-                        <div class="box"></div>
+                        <div class="box">
+                            <img :src="item.avatarUrl" alt="">
+                        </div>
                         <div class="lingjie">
                             <img src="/static/lj2.png" alt="" mode="widthFix">
                             <div class="font">{{idc+1}}</div>
@@ -67,13 +71,15 @@
                     <p class="t22">{{item.name}}</p>
                     <p class="t22">
                         <span>{{item.expSum}}</span>
-                        <img :src="item.avatarUrl" alt="" style="position:relative;top:7upx;">
+                        <img src="/static/yx.png" alt="" style="position:relative;top:7upx;">
                     </p>
                 </div>
 
                 <div class="item column_center_center" v-if="idc==2">
                     <div class="head">
-                        <div class="box"></div>
+                        <div class="box">
+                            <img :src="item.avatarUrl" alt="">
+                        </div>
                         <div class="lingjie">
                             <img src="/static/lj3.png" alt="" mode="widthFix">
                             <div class="font">{{idc+1}}</div>
@@ -84,13 +90,15 @@
                     <p class="t22">{{item.name}}</p>
                     <p class="t22">
                         <span>{{item.expSum}}</span>
-                        <img :src="item.avatarUrl" alt="" style="position:relative;top:7upx;">
+                        <img src="/static/yx.png" alt="" style="position:relative;top:7upx;">
                     </p>
                 </div>
 
                 <div class="item column_center_center" v-if="idc>2">
                     <div class="head">
-                        <div class="box"></div>
+                        <div class="box">
+                            <img :src="item.avatarUrl" alt="">
+                        </div>
                         <div class="rand">
                             <div class="font">{{idc+1}}</div>
                             <!-- <img src="/static/lj3.png" alt="" mode="widthFix"> -->
@@ -101,7 +109,7 @@
                     <p class="t22">{{item.name}}</p>
                     <p class="t22">
                         <span>{{item.expSum}}</span>
-                        <img :src="item.avatarUrl" alt="" style="position:relative;top:7upx;">
+                        <img src="/static/yx.png" alt="" style="position:relative;top:7upx;">
                     </p>
                 </div>
 
@@ -314,7 +322,6 @@
             }
         }
         .item{
-            width:33%;
             height:180upx;
             .zhanwei{
                 width:100%;

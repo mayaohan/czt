@@ -1,6 +1,6 @@
 import store from './store'
 
-const host = "http://39.106.214.109/xcx"
+const host = "https://5icoding.top/xcx"
 
 function get(url, data) {
   return request( host + url, 'GET', data)
