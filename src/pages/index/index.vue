@@ -369,7 +369,7 @@ import { clearInterval } from 'timers';
 		}
 		.bigbtn{
 			.btns{
-				width:312rpx;
+				width:312rpx!important;
 				height:110rpx;
 				border-radius:8rpx;
 				margin:28rpx 18rpx;
