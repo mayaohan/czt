@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </div> -->
-            <div class="gengduo" v-if="navigateLastPage!=0">
+            <div class="gengduo" v-if="param.pageNum<=navigateLastPage">
                 <div class="btns" @click="add">查看更多</div>
             </div>
         </div>
@@ -95,7 +95,7 @@
                     pageSize:10
                 },
                 flag:false,
-                navigateLastPage:0
+                navigateLastPage:2
             }
         },
         computed:{
@@ -138,13 +138,15 @@
                     this.list = this.list.concat(res.d.list)
                     this.$forceUpdate()
                     this.flag = false
-                    this.navigateLastPage = res.d.navigateLastPage;
+                    this.navigateLastPage = res.d.navigatePages;
                 }
             },
             add(){
                 if(this.flag) return
                 this.param.pageNum++
-                if(this.param.pageNum>this.navigateLastPage) return
+                if(this.param.pageNum>this.navigateLastPage){
+                    return
+                } 
                 this.zj()
             }
         },
@@ -154,6 +156,10 @@
                 path:`/pages/index/index?id=${this.userInfo.id}`,
 
             }
+        },
+        onHide(){
+            this.param.pageNum = 1
+            this.list = []
         },
         onShow(){
             this.zj()

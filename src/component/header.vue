@@ -51,16 +51,18 @@
         },
         filters:{
             getCH(a){
-                if(a>10) return '中本聪的传人'
-                if(a == 10) return '高级庄家'
-                if(a == 9) return '中级庄家'
-                if(a == 8) return '初级庄家'
-                if(a == 7) return '高级大佬'
-                if(a == 6) return '中级大佬'
-                if(a == 5) return '初级大佬'
-                if(a == 4) return '高级韭菜'
-                if(a == 3) return '中级韭菜'
-                if(a <= 2) return '初级韭菜'
+                if(a>10) return '中本聪'
+                if(a == 10) return '资本大鳄'
+                if(a == 9) return '大佬'
+                if(a == 8) return '庄家'
+                if(a == 7) return '华尔街精英'
+                if(a == 6) return '投资家'
+                if(a == 5) return '大户'
+                if(a == 4) return '资本新贵'
+                if(a == 3) return '牛散'
+                if(a == 2) return '成熟的韭菜'
+                if(a == 1) return '骄傲的韭菜'
+                if(a == 0) return '小白'
                 
             }
         },
