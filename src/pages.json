@@ -41,6 +41,18 @@
 			"style": {
 				"navigationBarTitleText": "信息填写"
 			}
+		},
+		{
+			"path": "pages/play/index",
+			"style": {
+				"navigationBarTitleText": "怎么玩"
+			}
+		},
+		{
+			"path": "pages/responsibility/index",
+			"style": {
+				"navigationBarTitleText": "免责声明"
+			}
 		}
 	],
 	"globalStyle": {

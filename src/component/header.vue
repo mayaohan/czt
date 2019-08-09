@@ -2,27 +2,31 @@
     <div class="conte">
         <!-- 个人信息及头像 -->
         <div class="header left_right_center">
-            <div class="avatarpanel" v-if="getUser">
-                <img class="avatar" :src="userInfo.avatarUrl"/>
+            <div class="avatarpanel">
+                <img v-if="userInfo.avatarUrl" class="avatar" :src="userInfo.avatarUrl"/>
+                <img v-else mode="widthFix" class="avatar" src="/static/users.png"/>
             </div>
             <div class="ri">
                 <div class="t34 fc1 b500" style="color:#FCCA2F;position:relative;">
-                    <span  v-if="getUser">{{userInfo.name}}</span>
+                    <span v-if="userInfo.name">{{userInfo.name}}</span>
+                    <span v-else>猜涨跌用户{{suijishu}}</span>
                     <div class="right" v-if="inde">
                         <span class="icon" @click="go('child')">
                             <img style="width:36upx;height:48upx;" src="/static/ss.png" alt="">
                         </span>
-                        <span class="icon">
+                        <span class="icon" @click="go('play')">
                             <img src="/static/nn.png" alt="" mode="widthFix">
                         </span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="or" v-if="getUser">
+        <div class="or">
             <div class="bq">
-                <span class="con t28"><i style="display:inline-block" class="icon-search iconfont"></i>{{userInfo.expSum}}</span>
+                <span class="con t28" v-if="userInfo.expSum"><i style="display:inline-block" class="icon-search iconfont"></i>{{userInfo.expSum}}</span>
+                <span class="con t28" v-else><i style="display:inline-block" class="icon-search iconfont"></i>--</span>
                 <span class="con t28" v-if="topWinTime>=0">{{topWinTime | getCH}}</span>
+                <span class="con t28" v-else>未获得称号</span>
             </div>
         </div>
     </div>
@@ -45,7 +49,20 @@
 				return this.$store.state.memberInfo
             },
             topWinTime(){
-                return this.$store.state.memberInfo.topWinTime
+                return this.$store.state.memberInfo.topWinTime || -1
+            },
+            suijishu(){
+                let now = new Date().getTime()
+                let star = new Date('2019/08/1 00:00:00').getTime()
+                let str = parseInt((now-star)/(60*60*1000*24))
+                let end = new Date().Format('h:m').split(':')
+                end.map(obj=>{
+                    if(obj.length==1){
+                        obj = '0'+obj
+                    }
+                    return obj
+                })
+                return str+end[0]+end[1]
             }
             
         },
@@ -126,6 +143,7 @@
         height:56upx;
         border-radius:50%;
         overflow:hidden;
+        background:#fff;
       }
       .ri{
 		width:100%;

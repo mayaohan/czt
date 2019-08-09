@@ -44,8 +44,8 @@
 				<div class="font">赢取的积分将在下注日晚9点15返回到您的账户 明日下午13:00后可参与心的一轮竞猜</div>
 			</div>
 			<div class="jd">
-				<div class="lv" :style="{width:width+'%'}"></div>
-				<div class="ho"></div>
+				<div class="lv" :style="{width:width+'%'}">{{width+'%'}}</div>
+				<div class="ho" :style="{width:(100-width)+'%'}">{{(100-width)+'%'}}</div>
 			</div>
 			<div class="timers left_right_center" v-if="isData.done=='0'">
 				<div class="item">
@@ -67,7 +67,7 @@
 		<div class="title_b t24 relative">
 			<div class="absolute every" :style="{'left':left+'px'}">
 				<span v-for="obj in noticeContent" :key="obj.id">
-					<span class="item">恭喜ID：<span class="huang">{{obj.id}}</span></span>
+					<!-- <span class="item">恭喜ID：<span class="huang">{{obj.id}}</span></span> -->
 					<span class="item"><span class="huang"> {{obj.content}}</span></span>
 					<span class="item"><span class="huang"> {{obj.createDate}}</span></span>
 				</span>
@@ -406,12 +406,21 @@ import { clearInterval } from 'timers';
 			margin:56rpx 40rpx;
 			display:flex;
 			.lv{
-				height:20rpx;
+				height:30rpx;
 				background:rgba(93,230,166,1);
+				font-size:18upx;
+				line-height:30upx;
+				color:#fff;
+				padding:0 20upx;
 			}
 			.ho{
-				height:20rpx;
+				height:30rpx;
 				background:rgba(252,98,98,1);
+				font-size:18upx;
+				line-height:30upx;
+				color:#fff;
+				padding:0 20upx;
+				text-align:right;
 			}
 		}
 	}
