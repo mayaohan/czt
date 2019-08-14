@@ -41,6 +41,13 @@
                 default:false
             }
         },
+        async mounted(){
+            
+			let data = await this.$http.post('/memberinfo/reloadMi')
+			if(data.s==1){
+                this.$store.commit('SET_memberInfo_SINGLE',data.d)
+			}
+        },
 		computed:{
 			getUser(){
 				return this.$store.state.memberInfo.id!=undefined

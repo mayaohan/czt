@@ -51,6 +51,15 @@ const store = new Vuex.Store({
                 data: state.memberInfo
             })
         },
+        // 刷新问题
+        SET_memberInfo_SINGLE(state,data){
+            const value = wx.getStorageSync('memberInfo')
+            if(value){
+                Object.assign(value,data)
+            }
+            this.commit('SET_memberInfo',value)
+            this.commit('UP_memberInfo',value)
+        },
         // 页面刷新在缓存里取用户信息
         UP_memberInfo(state,data){
             Object.assign(state.memberInfo,data)

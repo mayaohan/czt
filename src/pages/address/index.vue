@@ -48,7 +48,6 @@
                 subParam.goodsId = this.goodsId
                 let res = await this.$http.post('/userGoods/insert',subParam)
                 if(res.s == 1){
-                    console.log(res)
                     this.$store.commit('KOU_expSum',this.point)
                     uni.navigateBack({
                         delta: 1

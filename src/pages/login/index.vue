@@ -45,10 +45,7 @@
           if(this.outid!=null){
             formdata.inviter = this.outid
           }
-          // this.$store.commit('SET_PERSONAL',formdata)
-          console.log(formdata)
           let data = await this.$http.post('/memberinfo',formdata)
-          console.log(data)
           if(data.s==1){
             this.$store.commit('SET_memberInfo',data.d)
             wx.reLaunch({

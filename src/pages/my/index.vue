@@ -105,10 +105,8 @@
         },
         filters:{
             formatTime (number) {
-                console.log(number)
                 let format = 'Y年M月D日 h:m:s'
                 let time = new Date(number)
-                console.log(time)
                 let newArr = []
                 let formatArr = ['Y', 'M', 'D', 'h', 'm', 's']
 

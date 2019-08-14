@@ -218,7 +218,7 @@ import { clearInterval } from 'timers';
 					this.hour = this.tow(hour)
 					this.min = this.tow(minute)
 					this.isData.secCount-=60
-					console.log(second)
+					// console.log(second)
 					// let str = this.tow(day) + '<span class="time">天</span>'
 					// 	+ this.tow(hour) + '<span class="time">小时</span>'
 					// 	+ this.tow(minute) + '<span class="time">分钟</span>'
@@ -250,12 +250,6 @@ import { clearInterval } from 'timers';
 						return ob
 					})
 					this.noticeContent = res.d
-					this.noticeContent.push(res.d[0])
-					this.noticeContent.push(res.d[0])
-					this.noticeContent.push(res.d[0])
-					this.noticeContent.push(res.d[0])
-					this.noticeContent.push(res.d[0])
-					console.log(this.noticeContent)
 
 					
 				}
@@ -267,7 +261,7 @@ import { clearInterval } from 'timers';
 					query.select('.every').boundingClientRect(function (rect) {
 						
 						if(Math.abs(_this.left)-rect.width>100){
-							_this.left = 375
+							_this.left = 100
 						}else{
 							_this.left--
 						}
@@ -283,7 +277,7 @@ import { clearInterval } from 'timers';
 			this.userStatus()
 			setInterval(this.clock, 1000*60);
 			setInterval(this.animate, 30);
-		}
+		},
 	}
 </script>
 

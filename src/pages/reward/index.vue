@@ -102,7 +102,6 @@
                 let res = await this.$http.post('/goods/list')
                 if(res.s == 1){
                     this.list = res.d
-                    console.log(this.list)
                 }
             }
         }

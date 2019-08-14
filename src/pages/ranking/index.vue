@@ -236,11 +236,9 @@
                 let res = await this.$http.post('/memberinfo/getRanking')//获取全国积分排名
                 let resd = await this.$http.post('/memberinfo/getRankingByInviter')//获取自己邀请好友排名
                 if(res.s == 1){
-                    console.log(res)
                     this.chinaList = res.d
                 }
                 if(resd.s == 1){
-                    console.log(resd)
                     this.friendList = resd.d
                 }
             }
