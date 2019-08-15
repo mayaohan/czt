@@ -60,7 +60,7 @@
 				</div>
 			</div>
 			<div class="timers left_right_center" v-else>
-				<div class="vitem t34">已下注<span style="color:#5DE6A6;">涨</span>30积分</div>
+				<div class="vitem t34">已下注<span style="color:#5DE6A6;">涨</span>15积分</div>
 			</div>
 		</div>
 
