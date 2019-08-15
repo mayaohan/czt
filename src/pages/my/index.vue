@@ -33,8 +33,8 @@
                     </div>
                     <div class="right">
                         <span class="fen">胜利 
-                        <span class="huang" v-if="obj.result==1">+30</span>
-                        <span class="fen" v-else> -30 积分</span>
+                            <span class="huang" v-if="obj.result==1">+{{obj.takePoint}}</span>
+                            <span class="fen" v-else> -{{obj.takePoint}}</span>
                          积分</span>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                     this.list = this.list.concat(res.d.list)
                     this.$forceUpdate()
                     this.flag = false
-                    this.navigateLastPage = res.d.navigatePages;
+                    this.navigateLastPage = res.d.nextPage;
                 }
             },
             add(){
