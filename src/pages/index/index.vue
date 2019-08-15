@@ -41,7 +41,7 @@
 				<div class="btns ho left_right_center" @click="upAndDown(0)">买跌</div>
 			</div>
 			<div class="bigbtn left_right_center" v-else>
-				<div class="font">赢取的积分将在下注日晚9点15返回到您的账户 明日下午13:00后可参与心的一轮竞猜</div>
+				<div class="font">赢取的积分将在下注日晚9点15返回到您的账户 明日下午13:00后可参与新的一轮竞猜</div>
 			</div>
 			<div class="jd">
 				<div class="lv" :style="{width:width+'%'}">{{width+'%'}}</div>
