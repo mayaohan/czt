@@ -50,7 +50,7 @@
 			<div class="timers left_right_center" v-if="isData.done=='0'">
 				<div class="item">
 					<p class="t28 ts1">距离今日押注截止还有</p>
-					<p class="t24 ts2">（每次下注消耗 30 积分）</p>
+					<p class="t24 ts2">（每次下注消耗 15 积分）</p>
 				</div>
 				<div class="item left_right_center">
 					<div class="black">{{hour}}</div>
