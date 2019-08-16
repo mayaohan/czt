@@ -32,9 +32,10 @@
                         <span class="time">{{obj.createDate | formatTime}}</span>
                     </div>
                     <div class="right">
-                        <span class="fen">胜利 
-                            <span class="huang" v-if="obj.result==1">+{{obj.takePoint}}</span>
-                            <span class="fen" v-else> -{{obj.takePoint}}</span>
+                        <span class="fen"> 
+                            <span class="huang" v-if="obj.result==1">胜利+{{obj.takePoint}}</span>
+                            <span class="fen" v-if="obj.result!=1&&obj.takePoint!=0">失败-{{obj.takePoint}}</span>
+                            <span class="fen" v-if="obj.result!=1&&obj.takePoint==0">平局{{obj.takePoint}}</span>
                          积分</span>
                     </div>
                 </div>

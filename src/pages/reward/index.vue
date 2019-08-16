@@ -3,7 +3,11 @@
         <e-header></e-header>
         <div class="logos">
             <div class="item" v-for="obj in list" :key="obj.id">
-                <div class="icon" @click="env_change(obj)">
+                <div v-if="obj.num>0" class="icon" @click="env_change(obj)">
+                    <img :src="'/static/bt'+obj.id+'.png'" alt="" mode="widthFix">
+                    <div class="font left_right_center t28">兑换</div>
+                </div>
+                <div v-else class="icon action">
                     <img :src="'/static/bt'+obj.id+'.png'" alt="" mode="widthFix">
                     <div class="font left_right_center t28">兑换</div>
                 </div>
@@ -24,7 +28,7 @@
 			@handle="ent_ov"
 		>
 			<div style="width:100%;" class="text-center">
-				<p class="t34 cont">兑换此奖品消耗<span class="huang">{{expSum_single}}积分</span></p>
+				<p class="t34 cont">兑换{{expSum_name}}消耗<span class="huang">{{expSum_single}}积分</span></p>
 				<p class="t34 cont">并达到<span class="huang">10连胜</span>，确认兑换吗？</p>
 			</div>
 		</e-dialog>
@@ -59,7 +63,8 @@
                     id:'',
                     point:'',
                 },
-                expSum_single:''
+                expSum_single:'',
+                expSum_name:''
 			}
 		},
         methods:{
@@ -69,6 +74,7 @@
                 this.jpParam.point = data.point
                 this.ent.show = true
                 this.expSum_single = data.point
+                this.expSum_name = data.name
             },
             ent_ov(data){
                 this.ent.show = false
